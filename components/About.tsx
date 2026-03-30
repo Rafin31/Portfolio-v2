@@ -12,6 +12,36 @@ import {
   HiMapPin,
 } from "react-icons/hi2"
 import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi"
+import {
+  SiReact,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiTypescript,
+  SiMongodb,
+  SiPostgresql,
+  SiTailwindcss,
+  SiDocker,
+  SiGit,
+  SiFirebase,
+  SiJavascript,
+  SiPython,
+} from "react-icons/si"
+
+// Floating skill icons config — position, color, animation timing
+const floatingIcons = [
+  { Icon: SiReact,       label: "React",      x: "10%",  y: "8%",   color: "#61DAFB", delay: 0,    duration: 4   },
+  { Icon: SiNextdotjs,   label: "Next.js",    x: "70%",  y: "5%",   color: "#ffffff", delay: 0.5,  duration: 5   },
+  { Icon: SiNodedotjs,   label: "Node.js",    x: "85%",  y: "35%",  color: "#68A063", delay: 1,    duration: 4.5 },
+  { Icon: SiTypescript,  label: "TypeScript", x: "5%",   y: "50%",  color: "#3178C6", delay: 0.8,  duration: 5.5 },
+  { Icon: SiMongodb,     label: "MongoDB",    x: "75%",  y: "70%",  color: "#47A248", delay: 1.5,  duration: 4   },
+  { Icon: SiPostgresql,  label: "PostgreSQL", x: "20%",  y: "78%",  color: "#336791", delay: 0.3,  duration: 6   },
+  { Icon: SiTailwindcss, label: "Tailwind",   x: "50%",  y: "88%",  color: "#38BDF8", delay: 1.2,  duration: 4.8 },
+  { Icon: SiDocker,      label: "Docker",     x: "88%",  y: "15%",  color: "#2496ED", delay: 0.7,  duration: 5.2 },
+  { Icon: SiGit,         label: "Git",        x: "40%",  y: "10%",  color: "#F05032", delay: 2,    duration: 4.2 },
+  { Icon: SiFirebase,    label: "Firebase",   x: "60%",  y: "50%",  color: "#FFCA28", delay: 1.8,  duration: 5.8 },
+  { Icon: SiPython,      label: "Python",     x: "30%",  y: "40%",  color: "#3776AB", delay: 0.4,  duration: 6.2 },
+  { Icon: SiJavascript,  label: "JavaScript", x: "15%",  y: "22%",  color: "#F7DF1E", delay: 1.1,  duration: 4.6 },
+]
 
 // What I bring to the table cards
 const strengths = [
@@ -61,8 +91,41 @@ export default function About() {
 
   return (
     <section id="about" className="py-24 bg-surface relative overflow-hidden">
-      {/* Subtle background accent */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-accent-yellow/3 rounded-full blur-3xl pointer-events-none" />
+      {/* Floating skill icons in background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {floatingIcons.map(({ Icon, label, x, y, color, delay, duration }) => (
+          <motion.div
+            key={label}
+            className="absolute flex flex-col items-center gap-1"
+            style={{ left: x, top: y }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{
+              opacity: [0, 0.18, 0.18, 0],
+              scale: [0.8, 1, 1, 0.8],
+              y: [0, -18, 0],
+            }}
+            transition={{
+              opacity:  { duration: duration * 2, delay, repeat: Infinity, ease: "easeInOut" },
+              scale:    { duration: duration * 2, delay, repeat: Infinity, ease: "easeInOut" },
+              y:        { duration, delay, repeat: Infinity, ease: "easeInOut" },
+            }}
+          >
+            <div
+              className="w-12 h-12 rounded-2xl flex items-center justify-center border"
+              style={{
+                backgroundColor: `${color}12`,
+                borderColor: `${color}30`,
+                boxShadow: `0 0 16px ${color}20`,
+              }}
+            >
+              <Icon style={{ color, fontSize: 22 }} />
+            </div>
+            <span className="text-[9px] font-mono font-medium" style={{ color: `${color}80` }}>
+              {label}
+            </span>
+          </motion.div>
+        ))}
+      </div>
 
       <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
