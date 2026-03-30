@@ -30,19 +30,13 @@ function AnimatedLine() {
       <div className="absolute inset-0 bg-border/40 rounded-full" />
       {/* Animated glowing fill */}
       <motion.div
-        style={{ scaleY, originY: 0 }}
-        className="absolute inset-0 rounded-full"
-        // Gradient from amber to cyan
-        // Tailwind can't do dynamic gradients so use inline style
-        // eslint-disable-next-line react/forbid-dom-props
-        {...{
-          style: {
-            scaleY,
-            originY: 0,
-            background: "linear-gradient(180deg, #f59e0b, #22d3ee)",
-            boxShadow: "0 0 8px rgba(245,158,11,0.6)",
-          },
+        style={{
+          scaleY,
+          originY: 0,
+          background: "linear-gradient(180deg, #f59e0b, #22d3ee)",
+          boxShadow: "0 0 8px rgba(245,158,11,0.6)",
         }}
+        className="absolute inset-0 rounded-full"
       />
     </div>
   )
