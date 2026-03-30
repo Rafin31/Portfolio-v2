@@ -14,7 +14,7 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 })
 
-const BASE_URL = "https://chat-with-asif-hossain.vercel.app"
+const BASE_URL = "https://asifhossain.dev"
 
 export const metadata: Metadata = {
   // ── Core ──────────────────────────────────────────────────
