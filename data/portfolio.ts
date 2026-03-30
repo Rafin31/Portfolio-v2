@@ -393,7 +393,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 11,
     quote:
-      "Good service , I highly recommend !✅",
+      "Good service , I highly recommend !",
     name: "camaraal",
     role: "Product Manager",
     company: "Wilson Digital",
@@ -511,4 +511,10 @@ export const navLinks = [
   { href: "#projects", label: "Projects" },
   { href: "#testimonials", label: "Testimonials" },
   { href: "#contact", label: "Contact" },
+]
+
+// Page route links (Blog, Hire Me — rendered as <Link> not scroll anchors)
+export const pageLinks = [
+  { href: "/blog", label: "Blog" },
+  { href: "/hire-me", label: "Hire Me" },
 ]

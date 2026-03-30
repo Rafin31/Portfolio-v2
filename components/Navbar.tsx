@@ -2,52 +2,52 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { navLinks } from "@/data/portfolio"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { navLinks, pageLinks } from "@/data/portfolio"
 import { HiMenu, HiX } from "react-icons/hi"
 import { HiArrowDownTray } from "react-icons/hi2"
 
 export default function Navbar() {
-  // Track scroll position to change navbar background
   const [scrolled, setScrolled] = useState(false)
-  // Mobile menu open/close
   const [mobileOpen, setMobileOpen] = useState(false)
-  // Currently active section
   const [activeSection, setActiveSection] = useState("home")
+  const pathname = usePathname()
+  const isHome = pathname === "/"
 
-  // Add scroll listener
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
+    const handleScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Intersection Observer to track active section
+  // Only run intersection observer on the home page
   useEffect(() => {
+    if (!isHome) return
     const sectionIds = navLinks.map((l) => l.href.replace("#", ""))
     const observers: IntersectionObserver[] = []
-
     sectionIds.forEach((id) => {
       const el = document.getElementById(id)
       if (!el) return
       const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id)
-        },
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id) },
         { threshold: 0.4 }
       )
       obs.observe(el)
       observers.push(obs)
     })
-
     return () => observers.forEach((o) => o.disconnect())
-  }, [])
+  }, [isHome])
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false)
-    const id = href.replace("#", "")
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+    if (isHome) {
+      const id = href.replace("#", "")
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+    } else {
+      // Navigate to home page and anchor
+      window.location.href = `/${href}`
+    }
   }
 
   return (
@@ -65,17 +65,26 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <button
-            onClick={() => handleNavClick("#home")}
+            onClick={() => isHome ? handleNavClick("#home") : undefined}
             className="font-heading font-bold text-xl tracking-tight"
           >
-            <span className="text-accent-yellow">Asif </span>
-            <span className="text-accent-cyan">Hossain</span>
+            {isHome ? (
+              <>
+                <span className="text-accent-yellow">Asif </span>
+                <span className="text-accent-cyan">Hossain</span>
+              </>
+            ) : (
+              <Link href="/">
+                <span className="text-accent-yellow">Asif </span>
+                <span className="text-accent-cyan">Hossain</span>
+              </Link>
+            )}
           </button>
 
           {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.href.replace("#", "")
+              const isActive = isHome && activeSection === link.href.replace("#", "")
               return (
                 <button
                   key={link.href}
@@ -87,7 +96,6 @@ export default function Navbar() {
                   }`}
                 >
                   {link.label}
-                  {/* Active underline indicator */}
                   {isActive && (
                     <motion.div
                       layoutId="activeNav"
@@ -95,6 +103,29 @@ export default function Navbar() {
                     />
                   )}
                 </button>
+              )
+            })}
+            {/* Page route links */}
+            {pageLinks.map((link) => {
+              const isActive = pathname === link.href
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
+                    isActive
+                      ? "text-accent-yellow"
+                      : "text-text-muted hover:text-text-primary"
+                  }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute bottom-0 left-3 right-3 h-0.5 bg-accent-yellow rounded-full"
+                    />
+                  )}
+                </Link>
               )
             })}
           </div>
@@ -141,13 +172,34 @@ export default function Navbar() {
                   transition={{ delay: i * 0.05 }}
                   onClick={() => handleNavClick(link.href)}
                   className={`text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                    activeSection === link.href.replace("#", "")
+                    isHome && activeSection === link.href.replace("#", "")
                       ? "bg-accent-yellow/10 text-accent-yellow"
                       : "text-text-muted hover:text-text-primary hover:bg-card"
                   }`}
                 >
                   {link.label}
                 </motion.button>
+              ))}
+              {/* Page route links in mobile */}
+              {pageLinks.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: (navLinks.length + i) * 0.05 }}
+                >
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                      pathname === link.href
+                        ? "bg-accent-yellow/10 text-accent-yellow"
+                        : "text-text-muted hover:text-text-primary hover:bg-card"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
               <a
                 href="/Asif_Hossain_Resume.pdf"

@@ -1,0 +1,113 @@
+---
+title: "Case Study: Building a Medical Supplier System That Cut Admin Work by 60%"
+date: "2025-02-10"
+description: "A deep-dive into building a full-scale Medical Supplier Management System with React.js, Node.js, and MongoDB — and the engineering decisions that made it work for a US healthcare client."
+keywords: ["mern stack developer", "react nodejs case study", "fullstack developer australia", "web app development case study", "medical supplier management system", "react developer for hire"]
+readTime: "8 min read"
+category: "Case Study"
+author: "Asif Hossain"
+---
+
+One of the most technically and commercially significant projects I've delivered was a **Medical Supplier Management System** built for Mendoza Brothers Holdings, LLC — a US-based medical supply company.
+
+This post walks through the problem, the architecture, the challenges, and the measurable outcomes. If you're a business owner trying to understand what a custom web application can do for your operations, or a developer interested in real-world MERN stack architecture, this is for you.
+
+---
+
+## The Client and the Problem
+
+Mendoza Brothers Holdings manages the supply chain for medical equipment — ordering from suppliers, managing staff access levels, tracking deliveries, and handling large volumes of product data.
+
+When I was brought on, they were running most of this on spreadsheets, emails, and disconnected tools. The core pain points were:
+
+- **Manual data entry**: Staff were manually typing product data from spreadsheets into forms, one row at a time.
+- **No access control**: Everyone had access to everything. There was no way to restrict what junior staff could see or modify.
+- **Zero real-time visibility**: Managers had no live view of orders, stock levels, or team activity.
+- **Slow issue resolution**: When problems came up, they had to email back and forth — no shared context, no history.
+
+The brief was clear: build a centralised system that automates the busywork, locks down sensitive data, and gives managers a real-time view of the business.
+
+---
+
+## The Technical Architecture
+
+I built the system as a full-stack JavaScript application using the **MERN stack** (MongoDB, Express, React, Node.js), with several additional layers:
+
+### Frontend: React.js with Component-Based Architecture
+
+The client application was built in React.js with a focus on reusable components and a clean UI. Key features included:
+
+- **Dynamic data tables** with sorting, filtering, and pagination
+- **Role-aware views** — what a junior staff member sees is completely different from what an admin sees
+- **Real-time updates** via Socket.io (no page refresh needed to see new data)
+- **Bulk upload UI** — a drag-and-drop Excel import interface that parses and validates data before submission
+
+### Backend: Node.js + Express with JWT Auth and RBAC
+
+The API layer handled all business logic. The two most critical features were:
+
+**JWT Authentication**: Every request includes a signed token. The server validates the token and extracts the user's role before processing any request. No token, no access.
+
+**Role-Based Access Control (RBAC)**: I implemented a middleware layer that sits between routes and handlers. Each route is decorated with the minimum role required to access it. This means a manager can't accidentally delete a supplier record they shouldn't touch, and junior staff can't access billing data.
+
+### Database: MongoDB with Schema Design for Flexibility
+
+Medical supply data is messy — different suppliers have different data formats, products have varying attributes, and requirements change. MongoDB's document model was the right call here.
+
+I designed the schema to be:
+- **Consistent** for the core entities (users, suppliers, orders)
+- **Flexible** for product attributes that vary by supplier
+- **Indexed** correctly for the query patterns the application actually used
+
+### Real-Time Chat: Socket.io
+
+Rather than staff emailing each other about order issues, I integrated a real-time chat system tied to specific orders and suppliers. Staff can comment on a particular order, tag colleagues, and resolve issues without leaving the application. This cut issue resolution time by an estimated 35%.
+
+### Excel Integration
+
+This was the feature that saved the most time. The system accepts Excel files (`.xlsx`) for bulk product uploads. On the frontend, users drag-and-drop their spreadsheet. On the backend, a Node.js parser validates every row against the schema, flags errors with line numbers, and inserts valid rows in bulk.
+
+Before this feature, entering 500 products took half a day. After: under 5 minutes.
+
+---
+
+## Challenges and How I Solved Them
+
+### Challenge 1: Handling large bulk uploads without timeouts
+
+When uploading thousands of rows, a naive implementation blocks the request thread and times out. I solved this by processing uploads in chunks asynchronously, sending progress updates back to the client via Socket.io. The user sees a real-time progress bar instead of a spinner.
+
+### Challenge 2: Keeping the RBAC system maintainable
+
+Access control rules have a tendency to become a tangled mess as requirements grow. I designed the RBAC as a centralized configuration object — a single source of truth for which roles can perform which actions. Adding a new role or changing permissions requires editing one file, not hunting through dozens of route handlers.
+
+### Challenge 3: Cross-timezone collaboration
+
+The client was in Florida; I was in Wollongong. A 15-hour time difference. I solved this with aggressive async communication: detailed Loom video walkthroughs for every major feature, written handover notes for each sprint, and scheduled weekly calls during the brief overlap window. The project ran on Agile/Scrum methodology with 2-week sprints throughout.
+
+---
+
+## The Results
+
+After 18 months of development and iteration:
+
+- **60% reduction in admin workload** — bulk import eliminated manual data entry
+- **35% faster issue resolution** — real-time chat replaced email chains
+- **Zero security incidents** — JWT + RBAC has held up across the full deployment period
+- **5-star review from James Mendoza, CEO**: *"Asif delivered exactly what we needed — on time and with great attention to detail. Our medical management system runs flawlessly."*
+
+---
+
+## What This Shows for Australian Businesses
+
+Custom software built to your exact workflows will always outperform off-the-shelf tools for complex operations. The Mendoza Brothers system isn't a generic product — it's purpose-built for their supply chain, their team structure, and their data.
+
+If your business is running on spreadsheets and manual processes, a well-architected web application can transform your operations. The investment pays for itself in staff time alone.
+
+---
+
+## Want Something Similar Built?
+
+If this sounds like the kind of problem you're trying to solve — whether you're in Wollongong, Sydney, or anywhere in Australia — I'd be glad to scope it with you.
+
+[View my services](/hire-me) or [get in touch directly](/#contact).
