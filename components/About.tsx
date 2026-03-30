@@ -172,7 +172,7 @@ export default function About() {
               <span className="text-text-muted text-sm">
                 Currently:{" "}
                 <span className="text-text-primary font-medium">
-                  Masters Student @ University of Wollongong + Open to Opportunities
+                  Master of Computer Science Graduate @ University of Wollongong + Open to Opportunities
                 </span>
               </span>
             </motion.div>

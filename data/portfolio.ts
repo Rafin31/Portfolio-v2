@@ -11,7 +11,7 @@ export const personalInfo = {
   github: "https://github.com/Rafin31",
   linkedin: "https://www.linkedin.com/in/asif-hossain-6982b81ba/",
   fiverr: "https://www.fiverr.com/rafin_31",
-  bio: `I'm a passionate Full-Stack Developer and Software Engineer with 3+ years of professional experience building scalable, high-performance web applications. Currently pursuing my Master's in Computer Science (Software Engineering) at the University of Wollongong, I bring a strong blend of academic excellence and real-world engineering expertise.
+  bio: `I'm a passionate Full-Stack Developer and Software Engineer with 3+ years of professional experience building scalable, high-performance web applications. Having completed my Master's in Computer Science (Software Engineering) at the University of Wollongong, I bring a strong blend of academic excellence and real-world engineering expertise.
 
 I specialise in React.js, Next.js, Node.js, and cloud-based solutions. I've successfully delivered 50+ projects on Fiverr with 100% client satisfaction, and developed a full-scale Medical Supplier Management System for a US-based client — reducing admin workload by 60% through smart automation.
 
