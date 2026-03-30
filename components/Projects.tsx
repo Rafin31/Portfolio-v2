@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { motion, useInView, AnimatePresence } from "framer-motion"
+import { motion, useInView, AnimatePresence, LayoutGroup } from "framer-motion"
 import { projects, projectCategories, type ProjectCategory } from "@/data/portfolio"
 import { FiGithub, FiExternalLink } from "react-icons/fi"
 import { HiSparkles, HiArrowUpRight } from "react-icons/hi2"
@@ -77,13 +77,19 @@ export default function Projects() {
         </motion.div>
 
         {/* Projects grid */}
-        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => (
-              <ProjectCard key={project.id} project={project} index={i} />
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        <LayoutGroup>
+          <motion.div
+            layout
+            transition={{ layout: { duration: 0.4, ease: "easeInOut" } }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            <AnimatePresence mode="sync">
+              {filtered.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </LayoutGroup>
       </div>
     </section>
   )
@@ -91,10 +97,8 @@ export default function Projects() {
 
 function ProjectCard({
   project,
-  index,
 }: {
   project: (typeof projects)[0]
-  index: number
 }) {
   const [hovered, setHovered] = useState(false)
 
@@ -104,15 +108,21 @@ function ProjectCard({
   return (
     <motion.article
       layout
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.92 }}
-      transition={{ duration: 0.4, delay: index * 0.07 }}
+      layoutId={`project-card-${project.id}`}
+      initial={{ opacity: 0, scale: 0.94 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.94 }}
+      transition={{
+        opacity: { duration: 0.25 },
+        scale: { duration: 0.25 },
+        layout: { duration: 0.4, ease: "easeInOut" },
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`group relative bg-card border rounded-2xl overflow-hidden flex flex-col transition-all duration-500 ${
+      whileHover={{ y: -4 }}
+      className={`group relative bg-card border rounded-2xl overflow-hidden flex flex-col transition-colors transition-shadow duration-300 ${
         hovered
-          ? "border-accent-yellow/50 shadow-2xl shadow-accent-yellow/10 -translate-y-1"
+          ? "border-accent-yellow/50 shadow-2xl shadow-accent-yellow/10"
           : "border-border"
       }`}
     >
@@ -122,12 +132,8 @@ function ProjectCard({
         <span className="w-3 h-3 rounded-full bg-red-500/80" />
         <span className="w-3 h-3 rounded-full bg-accent-yellow/80" />
         <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-        {/* Fake URL bar */}
-        <div className="flex-1 mx-3 h-5 bg-background/60 rounded-md flex items-center px-3">
-          <span className="text-text-muted text-[10px] font-mono truncate opacity-60">
-            localhost:3000/{project.title.toLowerCase().replace(/\s+/g, "-")}
-          </span>
-        </div>
+        {/* Empty URL bar */}
+        <div className="flex-1 mx-3 h-5 bg-background/60 rounded-md" />
         {/* Project number */}
         <span className="text-text-muted font-mono text-[10px] opacity-50">{num}</span>
       </div>

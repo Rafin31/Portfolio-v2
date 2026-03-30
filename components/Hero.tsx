@@ -258,7 +258,6 @@ export default function Hero() {
               className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-accent-yellow/40 glow-yellow"
               style={{ zIndex: 1 }}
             >
-              {/* Profile photo — save your photo as public/profile.jpg */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/profile.jpg"

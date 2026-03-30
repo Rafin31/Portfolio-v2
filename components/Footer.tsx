@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { navLinks, personalInfo } from "@/data/portfolio"
-import { FiGithub, FiLinkedin, FiMail, FiHeart } from "react-icons/fi"
+import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi"
 import { HiArrowUp } from "react-icons/hi"
 
 export default function Footer() {
@@ -113,16 +113,6 @@ export default function Footer() {
           <p className="text-text-muted text-sm text-center sm:text-left">
             © {year} Asif Hossain. All rights reserved.
           </p>
-          <div className="flex items-center gap-1 text-text-muted text-sm">
-            Built with{" "}
-            <span className="mx-1 text-red-400">
-              <FiHeart className="w-3.5 h-3.5 inline" />
-            </span>{" "}
-            using{" "}
-            <span className="text-accent-yellow font-medium mx-1">Next.js</span>
-            &amp;
-            <span className="text-accent-cyan font-medium ml-1">TailwindCSS</span>
-          </div>
 
           {/* Back to top */}
           <motion.button
