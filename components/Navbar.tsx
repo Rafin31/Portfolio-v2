@@ -102,7 +102,8 @@ export default function Navbar() {
           {/* Download CV button (desktop) */}
           <div className="hidden md:flex items-center gap-3">
             <a
-              href="#"
+              href="/Asif_Hossain_Resume.pdf"
+              download="Asif_Hossain_Resume.pdf"
               className="flex items-center gap-2 px-4 py-2 bg-accent-yellow text-background text-sm font-semibold rounded-lg hover:bg-amber-400 transition-colors duration-200 glow-yellow-sm"
             >
               <HiArrowDownTray className="w-4 h-4" />
@@ -149,7 +150,8 @@ export default function Navbar() {
                 </motion.button>
               ))}
               <a
-                href="#"
+                href="/Asif_Hossain_Resume.pdf"
+                download="Asif_Hossain_Resume.pdf"
                 className="flex items-center gap-2 mt-2 px-4 py-3 bg-accent-yellow text-background text-sm font-semibold rounded-lg hover:bg-amber-400 transition-colors"
               >
                 <HiArrowDownTray className="w-4 h-4" />
