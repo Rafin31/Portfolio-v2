@@ -191,41 +191,49 @@ export default function Contact() {
               </motion.a>
             ))}
 
-            {/* Social links */}
-            <motion.div
+            {/* GitHub */}
+            <motion.a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, x: -40 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-card border border-border rounded-2xl p-5"
+              className="flex items-center gap-4 bg-card border border-border rounded-2xl p-5 hover:border-accent-yellow/40 transition-all duration-300 group card-hover"
             >
-              <div className="text-text-muted text-xs mb-4">Connect with me</div>
-              <div className="flex gap-4">
-                <a
-                  href={personalInfo.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2.5 border border-border rounded-xl text-text-muted hover:text-accent-yellow hover:border-accent-yellow/40 transition-all duration-200 text-sm font-medium"
-                >
-                  <FiGithub className="w-4 h-4" />
-                  GitHub
-                </a>
-                <a
-                  href={personalInfo.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2.5 border border-border rounded-xl text-text-muted hover:text-accent-cyan hover:border-accent-cyan/40 transition-all duration-200 text-sm font-medium"
-                >
-                  <FiLinkedin className="w-4 h-4" />
-                  LinkedIn
-                </a>
+              <div className="w-12 h-12 bg-accent-yellow/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <FiGithub className="text-accent-yellow w-5 h-5" />
               </div>
-            </motion.div>
+              <div>
+                <div className="text-text-muted text-xs mb-1">GitHub</div>
+                <div className="text-text-primary font-medium text-sm">github.com/Rafin31</div>
+              </div>
+            </motion.a>
+
+            {/* LinkedIn */}
+            <motion.a
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, x: -40 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="flex items-center gap-4 bg-card border border-border rounded-2xl p-5 hover:border-accent-cyan/40 transition-all duration-300 group card-hover"
+            >
+              <div className="w-12 h-12 bg-accent-cyan/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <FiLinkedin className="text-accent-cyan w-5 h-5" />
+              </div>
+              <div>
+                <div className="text-text-muted text-xs mb-1">LinkedIn</div>
+                <div className="text-text-primary font-medium text-sm">Asif Hossain</div>
+              </div>
+            </motion.a>
 
             {/* Availability badge */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
               className="bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-5 flex items-center gap-3"
             >
               <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse" />

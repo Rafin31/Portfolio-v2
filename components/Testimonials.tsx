@@ -32,13 +32,15 @@ function ReviewCard({ t }: { t: (typeof testimonials)[0] }) {
       {/* Stars */}
       <Stars rating={t.rating} />
 
-      {/* Quote text */}
-      <p className="mt-3 text-text-muted text-sm leading-relaxed line-clamp-4 group-hover:text-text-primary transition-colors duration-300">
-        &ldquo;{t.quote}&rdquo;
-      </p>
+      {/* Quote text — fixed height so all cards are uniform */}
+      <div className="h-24 mt-3 overflow-hidden">
+        <p className="text-text-muted text-sm leading-relaxed line-clamp-4 group-hover:text-text-primary transition-colors duration-300">
+          &ldquo;{t.quote}&rdquo;
+        </p>
+      </div>
 
-      {/* Author */}
-      <div className="flex items-center gap-3 mt-4 pt-4 border-t border-border">
+      {/* Author — fixed height */}
+      <div className="flex items-center gap-3 h-14 mt-2 pt-4 border-t border-border">
         <div
           className={`w-9 h-9 rounded-full bg-gradient-to-br ${t.avatarGradient} flex items-center justify-center flex-shrink-0 shadow-md`}
         >

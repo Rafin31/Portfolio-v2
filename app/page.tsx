@@ -10,10 +10,14 @@ import Projects from "@/components/Projects"
 import Testimonials from "@/components/Testimonials"
 import Contact from "@/components/Contact"
 import Footer from "@/components/Footer"
+import CustomCursor from "@/components/CustomCursor"
 
 export default function Home() {
   return (
     <main className="min-h-screen">
+      {/* Custom cursor */}
+      <CustomCursor />
+
       {/* Fixed navigation */}
       <Navbar />
 
