@@ -1,68 +1,55 @@
-# Asif Hossain — Portfolio v2
+# Asif Hossain — Full-Stack Developer
 
-> Personal portfolio website built with Next.js 14, TailwindCSS, and Framer Motion.
+**[asifhossain.dev](https://asifhossain.dev)** · Wollongong, NSW, Australia
+
+I'm a Full-Stack Developer with 3+ years of professional experience building scalable web applications. I completed my Master's in Computer Science (Software Engineering) at the University of Wollongong, and I've delivered 50+ projects on Fiverr with 100% client satisfaction.
+
+This is the source code for my personal portfolio — where I showcase my work, write about what I'm building, and make it easy for clients to hire me.
 
 ---
 
-## 🚀 Tech Stack
+## What's inside
 
-| Layer | Tech |
+The site is more than a basic portfolio. It includes:
+
+- **Project showcase** — 7 real-world projects, each with its own detail page covering the overview, key features, engineering challenges, and outcome
+- **Blog** — articles targeting developers and clients searching for fullstack help in Australia
+- **Hire Me page** — a services landing page for potential clients
+- **Contact form** — sends real emails directly to my inbox via Nodemailer
+
+---
+
+## Built with
+
+| | |
 |---|---|
 | Framework | Next.js 14 (App Router) |
+| Language | TypeScript |
 | Styling | TailwindCSS |
 | Animations | Framer Motion |
-| Language | TypeScript |
+| Blog | MDX + next-mdx-remote |
 | Email | Nodemailer (Gmail SMTP) |
-| Icons | React Icons |
-| Deployment | Vercel / any Node host |
+| Deployment | Vercel |
 
 ---
 
-## ✨ Features
-
-- **Hero** — Typewriter animation, floating particles, profile photo, stats
-- **About** — Bio, education, achievements, floating skill icons
-- **Skills** — Tabbed by category (Frontend, Backend, Database, DevOps, Tools)
-- **Experience** — Animated vertical timeline
-- **Projects** — Filterable grid with browser-window card design
-- **Testimonials** — Infinite auto-scrolling marquee (two rows, opposite directions)
-- **Contact** — Form that sends real emails to inbox via Nodemailer
-- **Responsive** — Fully mobile-friendly
-
----
-
-## 🛠️ Getting Started
-
-### 1. Clone the repo
+## Running locally
 
 ```bash
 git clone https://github.com/Rafin31/chat-with-Asif-Hossain-.git
 cd chat-with-Asif-Hossain-
-```
-
-### 2. Install dependencies
-
-```bash
 npm install
 ```
 
-### 3. Set up environment variables
-
-```bash
-cp .env.local.example .env.local
-```
-
-Then open `.env.local` and fill in your Gmail credentials:
+Create a `.env.local` file:
 
 ```env
 EMAIL_USER=your-gmail@gmail.com
 EMAIL_PASS=your-16-char-app-password
-EMAIL_TO=your-gmail@gmail.com
+EMAIL_TO=your-inbox@gmail.com
 ```
 
-> Get a Gmail App Password at: **Google Account → Security → 2-Step Verification → App Passwords**
-
-### 4. Run the dev server
+Then run:
 
 ```bash
 npm run dev
@@ -72,51 +59,36 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 📦 Build & Deploy
+## Project structure
 
-```bash
-# Build and start production server
-npm run build:start
-
-# Or separately
-npm run build
-npm run start
 ```
+app/
+  page.tsx                  # Home page (all sections)
+  blog/                     # Blog listing + individual posts
+  projects/[slug]/          # Individual project detail pages
+  hire-me/                  # Services & pricing page
+  api/contact/route.ts      # Contact form email handler
+
+components/                 # Hero, About, Skills, Experience,
+                            # Projects, Testimonials, Contact, Footer
+
+content/blog/               # MDX blog posts
+data/
+  portfolio.ts              # Single source of truth for all content
+  projectDetails.ts         # Extended project info (features, images)
+lib/
+  blog.ts                   # MDX + frontmatter utilities
+  shimmer.ts                # Blur placeholder for images
+```
+
+> All personal content (bio, projects, skills, experience, testimonials) lives in `data/portfolio.ts`.
 
 ---
 
-## 📁 Project Structure
+## Reach me
 
-```
-├── app/
-│   ├── api/contact/route.ts   # Email API endpoint
-│   ├── globals.css            # Global styles + animations
-│   └── layout.tsx / page.tsx
-├── components/                # All section components
-│   ├── Navbar.tsx
-│   ├── Hero.tsx
-│   ├── About.tsx
-│   ├── Skills.tsx
-│   ├── Experience.tsx
-│   ├── Projects.tsx
-│   ├── Testimonials.tsx
-│   ├── Contact.tsx
-│   └── Footer.tsx
-├── data/
-│   └── portfolio.ts           # ← Edit all content here
-└── public/
-    └── profile.jpg            # Profile photo
-    └── Asif_Hossain_Resume.pdf
-```
-
-> **To update content** — edit `data/portfolio.ts`. Everything on the site pulls from this single file.
-
----
-
-## 📬 Contact
-
-**Asif Hossain**
-- Email: [asifhossain976@gmail.com](mailto:asifhossain976@gmail.com)
-- LinkedIn: [linkedin.com/in/asif-hossain-6982b81ba](https://www.linkedin.com/in/asif-hossain-6982b81ba/)
-- GitHub: [github.com/Rafin31](https://github.com/Rafin31)
-- Fiverr: [fiverr.com/rafin_31](https://www.fiverr.com/rafin_31)
+- **Website:** [asifhossain.dev](https://asifhossain.dev)
+- **Email:** [asifhossain976@gmail.com](mailto:asifhossain976@gmail.com)
+- **LinkedIn:** [linkedin.com/in/asif-hossain-6982b81ba](https://www.linkedin.com/in/asif-hossain-6982b81ba/)
+- **GitHub:** [github.com/Rafin31](https://github.com/Rafin31)
+- **Fiverr:** [fiverr.com/rafin_31](https://www.fiverr.com/rafin_31)
