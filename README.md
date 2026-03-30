@@ -4,7 +4,7 @@
 
 I'm a Full-Stack Developer with 3+ years of professional experience building scalable web applications. I completed my Master's in Computer Science (Software Engineering) at the University of Wollongong, and I've delivered 50+ projects on Fiverr with 100% client satisfaction.
 
-This is the source code for my personal portfolio — where I showcase my work, write about what I'm building, and make it easy for clients to hire me.
+This is the source code for my personal portfolio, where I showcase my work, write about what I'm building, and make it easy for clients to hire me.
 
 ---
 
@@ -12,10 +12,10 @@ This is the source code for my personal portfolio — where I showcase my work, 
 
 The site is more than a basic portfolio. It includes:
 
-- **Project showcase** — 7 real-world projects, each with its own detail page covering the overview, key features, engineering challenges, and outcome
-- **Blog** — articles targeting developers and clients searching for fullstack help in Australia
-- **Hire Me page** — a services landing page for potential clients
-- **Contact form** — sends real emails directly to my inbox via Nodemailer
+- **Project showcase** : 7 real-world projects, each with its own detail page covering the overview, key features, engineering challenges, and outcome
+- **Blog** : articles targeting developers and clients searching for fullstack help in Australia
+- **Hire Me page** : a services landing page for potential clients
+- **Contact form** : sends real emails directly to my inbox via Nodemailer
 
 ---
 
