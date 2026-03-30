@@ -58,7 +58,6 @@ export default function Projects() {
                   : "bg-card border border-border text-text-muted hover:text-text-primary hover:border-accent-yellow/30"
               }`}
             >
-              {/* Active background pill */}
               {activeFilter === cat.id && (
                 <motion.span
                   layoutId="filterPill"
@@ -95,15 +94,27 @@ export default function Projects() {
   )
 }
 
-function ProjectCard({
-  project,
-}: {
-  project: (typeof projects)[0]
-}) {
-  const [hovered, setHovered] = useState(false)
+// Stable float positions per tech tag slot so they don't shift on re-render
+const TAG_SLOTS = [
+  { top: "12%",  left: "8%"  },
+  { top: "68%",  left: "6%"  },
+  { top: "14%",  right: "7%" },
+  { top: "70%",  right: "6%" },
+]
 
-  // Format project number as 01, 02, etc.
+const FLOAT_VARIANTS = [
+  { y: [0, -8, 0],  duration: 3.2 },
+  { y: [0,  7, 0],  duration: 3.8 },
+  { y: [0, -6, 0],  duration: 4.1 },
+  { y: [0,  8, 0],  duration: 3.5 },
+]
+
+function ProjectCard({ project }: { project: (typeof projects)[0] }) {
+  const [hovered, setHovered] = useState(false)
   const num = String(project.id).padStart(2, "0")
+
+  // Show up to 4 floating tech tags (corner positions)
+  const floatingTags = project.tech.slice(0, 4)
 
   return (
     <motion.article
@@ -120,59 +131,103 @@ function ProjectCard({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       whileHover={{ y: -4 }}
-      className={`group relative bg-card border rounded-2xl overflow-hidden flex flex-col transition-colors transition-shadow duration-300 ${
+      className={`group relative bg-card border rounded-2xl overflow-hidden flex flex-col transition-colors duration-300 ${
         hovered
           ? "border-accent-yellow/50 shadow-2xl shadow-accent-yellow/10"
           : "border-border"
       }`}
     >
-      {/* ── Browser chrome header ─────────────────────────── */}
+      {/* ── Browser chrome ─────────────────────────────────── */}
       <div className="flex items-center gap-2 px-4 py-3 bg-surface border-b border-border flex-shrink-0">
-        {/* Traffic-light dots */}
         <span className="w-3 h-3 rounded-full bg-red-500/80" />
         <span className="w-3 h-3 rounded-full bg-accent-yellow/80" />
         <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-        {/* Empty URL bar */}
         <div className="flex-1 mx-3 h-5 bg-background/60 rounded-md" />
-        {/* Project number */}
         <span className="text-text-muted font-mono text-[10px] opacity-50">{num}</span>
       </div>
 
-      {/* ── Gradient screenshot area ───────────────────────── */}
+      {/* ── Rich preview area ──────────────────────────────── */}
       <div className={`relative h-48 bg-gradient-to-br ${project.gradient} overflow-hidden flex-shrink-0`}>
-        {/* Animated grid overlay */}
+
+        {/* Dot-grid pattern (replaces plain line grid) */}
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
+            backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)",
+            backgroundSize: "20px 20px",
           }}
         />
 
-        {/* Large faded project number */}
-        <div className="absolute -bottom-4 -right-2 font-heading font-bold text-8xl text-white/10 select-none leading-none">
+        {/* Radial vignette so edges are darker */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0,0,0,0.35) 100%)",
+          }}
+        />
+
+        {/* Animated glow orb — top-left */}
+        <motion.div
+          className="absolute w-32 h-32 rounded-full blur-3xl bg-white/20"
+          style={{ top: "-20%", left: "-8%" }}
+          animate={{ x: [0, 12, 0], y: [0, -8, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Animated glow orb — bottom-right */}
+        <motion.div
+          className="absolute w-24 h-24 rounded-full blur-2xl bg-white/15"
+          style={{ bottom: "-15%", right: "5%" }}
+          animate={{ x: [0, -10, 0], y: [0, 10, 0] }}
+          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+        />
+
+        {/* Floating tech tags */}
+        {floatingTags.map((tech, i) => (
+          <motion.div
+            key={tech}
+            className="absolute text-[10px] bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-2.5 py-[3px] text-white/90 font-mono whitespace-nowrap select-none"
+            style={TAG_SLOTS[i]}
+            animate={{ y: FLOAT_VARIANTS[i].y }}
+            transition={{
+              duration: FLOAT_VARIANTS[i].duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.35,
+            }}
+          >
+            {tech}
+          </motion.div>
+        ))}
+
+        {/* Large faded number watermark */}
+        <div className="absolute -bottom-3 -right-1 font-heading font-black text-[6rem] text-white/[0.07] select-none leading-none pointer-events-none">
           {num}
         </div>
 
-        {/* Project title centred */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-          <div className="font-heading font-bold text-lg text-white drop-shadow-lg leading-snug">
+        {/* Center: title + highlight */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10">
+          <div className="font-heading font-bold text-base text-white drop-shadow-lg leading-snug max-w-[160px]">
             {project.title}
           </div>
           {project.highlight && (
-            <div className="mt-3 flex items-center gap-1.5 bg-black/30 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-white border border-white/20">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="mt-3 flex items-center gap-1.5 bg-black/40 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-white border border-white/20"
+            >
               <HiSparkles className="w-3 h-3 text-accent-yellow" />
               {project.highlight}
-            </div>
+            </motion.div>
           )}
         </div>
 
         {/* Hover overlay with links */}
         <motion.div
           animate={{ opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.25 }}
-          className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center gap-3"
+          transition={{ duration: 0.2 }}
+          className="absolute inset-0 bg-black/65 backdrop-blur-[3px] flex items-center justify-center gap-3 z-20"
         >
           <a
             href={project.github}
@@ -195,7 +250,6 @@ function ProjectCard({
 
       {/* ── Card body ─────────────────────────────────────── */}
       <div className="p-5 flex flex-col flex-1 gap-3">
-        {/* Title row */}
         <div className="flex items-start justify-between gap-2">
           <h3 className={`font-heading font-semibold text-sm leading-snug transition-colors duration-300 ${hovered ? "text-accent-yellow" : "text-text-primary"}`}>
             {project.title}
@@ -208,10 +262,8 @@ function ProjectCard({
           </motion.div>
         </div>
 
-        {/* Description */}
         <p className="text-text-muted text-xs leading-relaxed flex-1">{project.description}</p>
 
-        {/* Tech tags */}
         <div className="flex flex-wrap gap-1.5 pt-1">
           {project.tech.slice(0, 4).map((t) => (
             <span
@@ -228,7 +280,6 @@ function ProjectCard({
           )}
         </div>
 
-        {/* Bottom links */}
         <div className="flex items-center justify-between pt-3 mt-auto border-t border-border">
           <a
             href={project.github}
