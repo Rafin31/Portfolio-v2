@@ -56,7 +56,7 @@ function ProfileRing({
   )
 }
 
-// Particles data — pre-computed so they don't change on re-render
+// Particles data - pre-computed so they don't change on re-render
 const particles = [
   { x: "10%", y: "20%", delay: 0, size: 4 },
   { x: "20%", y: "60%", delay: 1, size: 6 },
@@ -95,7 +95,7 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Social links — vertical on left side (hidden on mobile) */}
+      {/* Social links - vertical on left side (hidden on mobile) */}
       <motion.div
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
@@ -133,7 +133,7 @@ export default function Hero() {
 
       {/* Main content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 grid lg:grid-cols-2 gap-12 items-center w-full">
-        {/* Left side — text content */}
+        {/* Left side - text content */}
         <div className="flex flex-col gap-6">
           {/* Greeting */}
           <motion.div
@@ -238,7 +238,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Right side — profile image placeholder */}
+        {/* Right side - profile image placeholder */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -270,7 +270,7 @@ export default function Hero() {
               />
             </motion.div>
 
-            {/* Floating badge — experience */}
+            {/* Floating badge - experience */}
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -281,7 +281,7 @@ export default function Hero() {
               <div className="text-text-muted text-xs">Years Exp.</div>
             </motion.div>
 
-            {/* Floating badge — projects */}
+            {/* Floating badge - projects */}
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}

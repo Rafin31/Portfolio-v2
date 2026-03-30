@@ -5,7 +5,7 @@ import Footer from "@/components/Footer"
 import { getAllPosts } from "@/lib/blog"
 
 export const metadata: Metadata = {
-  title: "Dev Blog — Full-Stack Development Insights from Wollongong",
+  title: "Dev Blog: Full-Stack Development Insights from Wollongong",
   description:
     "Articles on React, Next.js, Node.js, freelancing in Australia, and web development case studies. Written by a full-stack developer based in Wollongong, NSW.",
   keywords: [
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://asifhossain.dev/blog",
-    title: "Dev Blog | Asif Hossain — Full-Stack Developer Wollongong",
+    title: "Dev Blog | Asif Hossain, Full-Stack Developer Wollongong",
     description:
       "Articles on React, Next.js, web development, and freelancing in Australia.",
   },
@@ -60,7 +60,7 @@ export default function BlogPage() {
             </h1>
             <p className="text-text-muted text-lg max-w-2xl mx-auto">
               Articles on full-stack development, web technologies, and
-              freelancing in Australia — written by a developer based in
+              freelancing in Australia, written by a developer based in
               Wollongong, NSW.
             </p>
           </div>
@@ -70,7 +70,7 @@ export default function BlogPage() {
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {posts.length === 0 ? (
             <p className="text-text-muted text-center py-20">
-              No posts yet — check back soon.
+              No posts yet. Check back soon.
             </p>
           ) : (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

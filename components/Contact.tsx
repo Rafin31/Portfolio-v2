@@ -167,7 +167,7 @@ export default function Contact() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Left — Contact info */}
+          {/* Left - Contact info */}
           <div className="flex flex-col gap-6">
             {/* Info cards */}
             {contactCards.map((card, i) => (
@@ -243,7 +243,7 @@ export default function Contact() {
             </motion.div>
           </div>
 
-          {/* Right — Contact form */}
+          {/* Right - Contact form */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}

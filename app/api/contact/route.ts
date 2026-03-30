@@ -99,7 +99,7 @@ export async function POST(req: NextRequest) {
     const autoReply = {
       from: `"Asif Hossain" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: `Re: ${subject} — Thanks for reaching out!`,
+      subject: `Re: ${subject} - Thanks for reaching out!`,
       html: `
         <!DOCTYPE html>
         <html>

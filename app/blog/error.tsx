@@ -22,7 +22,7 @@ export default function BlogError({ error, reset }: ErrorProps) {
         </h1>
         <p className="text-text-muted text-sm leading-relaxed mb-8">
           There was a problem loading the blog content. This is usually
-          temporary — try again or head back to the blog index.
+          temporary. Try again or head back to the blog index.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
           <button

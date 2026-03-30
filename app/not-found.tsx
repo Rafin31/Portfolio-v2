@@ -28,7 +28,7 @@ export default function NotFound() {
           {/* Sub-message */}
           <p className="text-text-muted text-base sm:text-lg leading-relaxed mb-10">
             The URL you followed might be wrong, the page may have moved, or
-            it&apos;s still in the works. Check back soon — new content is
+            it&apos;s still in the works. Check back soon, new content is
             added regularly.
           </p>
 

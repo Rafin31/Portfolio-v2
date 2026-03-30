@@ -27,7 +27,7 @@ import {
   SiPython,
 } from "react-icons/si"
 
-// Floating skill icons config — position, color, animation timing
+// Floating skill icons config - position, color, animation timing
 const floatingIcons = [
   { Icon: SiReact,       label: "React",      x: "10%",  y: "8%",   color: "#61DAFB", delay: 0,    duration: 4   },
   { Icon: SiNextdotjs,   label: "Next.js",    x: "70%",  y: "5%",   color: "#ffffff", delay: 0.5,  duration: 5   },
@@ -144,7 +144,7 @@ export default function About() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left — Bio text */}
+          {/* Left - Bio text */}
           <div className="flex flex-col gap-8">
             <motion.div
               custom={0}
@@ -210,7 +210,7 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Right — Education + Achievements */}
+          {/* Right - Education + Achievements */}
           <div className="flex flex-col gap-8">
             {/* Education */}
             <motion.div

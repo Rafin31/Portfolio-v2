@@ -37,7 +37,7 @@ export default function Projects() {
             Projects
           </h2>
           <p className="text-text-muted mt-5 text-base max-w-xl">
-            A selection of real-world projects — from enterprise systems to blockchain platforms.
+            A selection of real-world projects, from enterprise systems to blockchain platforms.
           </p>
         </motion.div>
 

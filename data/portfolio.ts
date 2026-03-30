@@ -13,7 +13,7 @@ export const personalInfo = {
   fiverr: "https://www.fiverr.com/rafin_31",
   bio: `I'm a passionate Full-Stack Developer and Software Engineer with 3+ years of professional experience building scalable, high-performance web applications. Having completed my Master's in Computer Science (Software Engineering) at the University of Wollongong, I bring a strong blend of academic excellence and real-world engineering expertise.
 
-I specialise in React.js, Next.js, Node.js, and cloud-based solutions. I've successfully delivered 50+ projects on Fiverr with 100% client satisfaction, and developed a full-scale Medical Supplier Management System for a US-based client — reducing admin workload by 60% through smart automation.
+I specialise in React.js, Next.js, Node.js, and cloud-based solutions. I've successfully delivered 50+ projects on Fiverr with 100% client satisfaction, and developed a full-scale Medical Supplier Management System for a US-based client, reducing admin workload by 60% through smart automation.
 
 I thrive in agile environments, enjoy solving complex problems, and am always eager to learn and contribute to meaningful projects.`,
 }
@@ -245,7 +245,7 @@ export const projects: Project[] = [
     title: "Pocket Class",
     description: "PocketClass connects students to freelance instructors in sports, music, and the arts, streamlining scheduling, secure payments, and administrative tasks into one seamless experience.",
     longDescription:
-      "Founded by a team who personally experienced the challenges of finding qualified instructors—from countless online searches to messy payment processes—we set out to build a better way. PocketClass connects students to freelance instructors in sports, music, and the arts, streamlining scheduling, secure payments, and administrative tasks into one seamless experience.",
+      "Founded by a team who personally experienced the challenges of finding qualified instructors, from countless online searches to messy payment processes, we set out to build a better way. PocketClass connects students to freelance instructors in sports, music, and the arts, streamlining scheduling, secure payments, and administrative tasks into one seamless experience.",
     category: ["freelance", "fullstack", "backend"],
     tech: ["Next.js", "Node.js", "Socket.io", "MongoDB", "Firebase"],
     github: "#",
@@ -294,7 +294,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 1,
     quote:
-      "Asif delivered exactly what we needed — on time and with great attention to detail. Our medical management system runs flawlessly. He understood complex business requirements and translated them into elegant code. Great work and prompt service. What more can you ask for. I hope to work with RAFIN again in the future to continue development.",
+      "Asif delivered exactly what we needed, on time and with great attention to detail. Our medical management system runs flawlessly. He understood complex business requirements and translated them into elegant code. Great work and prompt service. What more can you ask for. I hope to work with RAFIN again in the future to continue development.",
     name: "James Mendoza",
     role: "CEO",
     company: "Mendoza Brothers Holdings",
@@ -479,7 +479,7 @@ export const achievements = [
   {
     id: 2,
     title: "SJ Innovation Hackathon",
-    description: "1st Runner-Up — competed against 50+ teams",
+    description: "1st Runner-Up, competing against 50+ teams",
     icon: "medal",
   },
   {
@@ -513,7 +513,7 @@ export const navLinks = [
   { href: "#contact", label: "Contact" },
 ]
 
-// Page route links (Blog, Hire Me — rendered as <Link> not scroll anchors)
+// Page route links (Blog, Hire Me - rendered as <Link> not scroll anchors)
 export const pageLinks = [
   { href: "/blog", label: "Blog" },
   { href: "/hire-me", label: "Hire Me" },

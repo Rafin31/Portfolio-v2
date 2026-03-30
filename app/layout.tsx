@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   // ── Core ──────────────────────────────────────────────────
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Asif Hossain | Full-Stack Developer — React, Next.js, Node.js",
+    default: "Asif Hossain | Full-Stack Developer | React, Next.js, Node.js",
     template: "%s | Asif Hossain",
   },
   description:
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: BASE_URL,
-    title: "Asif Hossain | Full-Stack Developer — React, Next.js, Node.js",
+    title: "Asif Hossain | Full-Stack Developer | React, Next.js, Node.js",
     description:
       "Full-Stack Developer based in Australia. Building scalable web applications with React.js, Next.js, Node.js and more. 50+ projects, 5-star rated.",
     siteName: "Asif Hossain Portfolio",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
         url: "/profile.jpg",
         width: 400,
         height: 400,
-        alt: "Asif Hossain — Full-Stack Developer",
+        alt: "Asif Hossain, Full-Stack Developer",
       },
     ],
     locale: "en_AU",

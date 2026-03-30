@@ -8,7 +8,7 @@ const BASE_URL = "https://asifhossain.dev"
 export const metadata: Metadata = {
   title: "Hire a Full-Stack Developer in Wollongong, Australia",
   description:
-    "Hire Asif Hossain — a full-stack developer based in Wollongong, NSW. React, Next.js, Node.js, and cloud expertise. 50+ projects delivered with 100% client satisfaction.",
+    "Hire Asif Hossain, a full-stack developer based in Wollongong, NSW. React, Next.js, Node.js, and cloud expertise. 50+ projects delivered with 100% client satisfaction.",
   keywords: [
     "hire fullstack developer wollongong",
     "hire react developer australia",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hire Asif Hossain — Full-Stack Developer, Wollongong",
+    title: "Hire Asif Hossain | Full-Stack Developer, Wollongong",
     description: "React, Next.js, Node.js. 50+ projects. 100% satisfaction.",
     images: ["/profile.jpg"],
   },
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 const serviceJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "Full-Stack Web Development — Asif Hossain",
+  name: "Full-Stack Web Development by Asif Hossain",
   url: `${BASE_URL}/hire-me`,
   image: `${BASE_URL}/profile.jpg`,
   description:
@@ -76,7 +76,7 @@ const SERVICES = [
     icon: "🖥️",
     title: "Full-Stack Web Applications",
     description:
-      "Custom web apps built end-to-end — from database schema to pixel-perfect UI. Ideal for SaaS products, internal tools, and business systems.",
+      "Custom web apps built end-to-end, from database schema to pixel-perfect UI. Ideal for SaaS products, internal tools, and business systems.",
     tech: ["React.js", "Next.js", "Node.js", "MongoDB", "PostgreSQL"],
   },
   {
@@ -127,7 +127,7 @@ const PROCESS = [
     step: "02",
     title: "Proposal & Scope",
     description:
-      "I provide a detailed written proposal with scope, tech stack recommendation, timeline, and fixed price — no surprises.",
+      "I provide a detailed written proposal with scope, tech stack recommendation, timeline, and fixed price. No surprises.",
   },
   {
     step: "03",
@@ -146,7 +146,7 @@ const PROCESS = [
 const FAQS = [
   {
     q: "Where are you based, and do you work with clients outside Wollongong?",
-    a: "I'm based in Wollongong, NSW, Australia. I work with clients locally in the Illawarra region, across Australia (Sydney, Melbourne, Brisbane, etc.), and internationally — including the US and UK. All project communication is handled online, with in-person meetings available for local clients.",
+    a: "I'm based in Wollongong, NSW, Australia. I work with clients locally in the Illawarra region, across Australia (Sydney, Melbourne, Brisbane, etc.), and internationally, including the US and UK. All project communication is handled online, with in-person meetings available for local clients.",
   },
   {
     q: "How much does a web development project cost?",
@@ -162,7 +162,7 @@ const FAQS = [
   },
   {
     q: "Can you take over an existing project or legacy codebase?",
-    a: "Yes. I regularly take on existing projects — whether that's adding features, fixing bugs, or modernising older code. I'll do a code review first to understand what's there and provide an honest assessment before committing to scope.",
+    a: "Yes. I regularly take on existing projects, whether that's adding features, fixing bugs, or modernising older code. I'll do a code review first to understand what's there and provide an honest assessment before committing to scope.",
   },
   {
     q: "Do you offer ongoing support after the project launches?",
@@ -202,7 +202,7 @@ export default function HireMePage() {
           </h1>
           <p className="text-text-muted text-lg sm:text-xl max-w-2xl mx-auto mb-10">
             React, Next.js &amp; Node.js expert with 3+ years of experience and
-            50+ projects delivered. Based in Wollongong, NSW — available for
+            50+ projects delivered. Based in Wollongong, NSW, available for
             local and remote projects across Australia and globally.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -316,7 +316,7 @@ export default function HireMePage() {
               &ldquo;
             </div>
             <p className="text-text-primary text-lg leading-relaxed mb-6 relative z-10">
-              Asif delivered exactly what we needed — on time and with great
+              Asif delivered exactly what we needed, on time and with great
               attention to detail. Our medical management system runs
               flawlessly. He understood complex business requirements and
               translated them into elegant code.

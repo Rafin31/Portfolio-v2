@@ -24,7 +24,7 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid sm:grid-cols-3 gap-10 items-start">
-          {/* Left — Logo & tagline */}
+          {/* Left - Logo & tagline */}
           <div className="flex flex-col gap-4">
             <button onClick={() => handleNavClick("#home")} className="text-left">
               <span className="font-heading font-bold text-2xl">
@@ -66,7 +66,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Center — Quick links */}
+          {/* Center - Quick links */}
           <div>
             <h4 className="font-heading font-semibold text-text-primary text-sm mb-4 tracking-wide">
               Quick Links
@@ -84,7 +84,7 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Right — Contact info */}
+          {/* Right - Contact info */}
           <div>
             <h4 className="font-heading font-semibold text-text-primary text-sm mb-4 tracking-wide">
               Contact
