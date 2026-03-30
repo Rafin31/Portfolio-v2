@@ -165,6 +165,7 @@ export type ProjectCategory = "all" | "fullstack" | "blockchain" | "freelance" |
 
 export interface Project {
   id: number
+  slug: string
   title: string
   description: string
   longDescription: string
@@ -179,6 +180,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 1,
+    slug: "medical-supplier-management-system",
     title: "Medical Supplier Management System",
     description: "Full-stack web app for managing medical supplier orders, staff, and workflows with real-time chat.",
     longDescription:
@@ -192,6 +194,7 @@ export const projects: Project[] = [
   },
   {
     id: 2,
+    slug: "assert-blockchain-prediction-platform",
     title: "ASSERT Prediction Platform",
     description: "Blockchain-based sports prediction platform with Solidity smart contracts and real-time token transactions.",
     longDescription:
@@ -205,6 +208,7 @@ export const projects: Project[] = [
   },
   {
     id: 3,
+    slug: "auto-parts-ecommerce-platform",
     title: "Auto Parts E-Commerce Platform",
     description: "Full-stack e-commerce store with Stripe payments, product management, and order tracking.",
     longDescription:
@@ -217,6 +221,7 @@ export const projects: Project[] = [
   },
   {
     id: 4,
+    slug: "game-coach-platform",
     title: "Game Coach Platform",
     description: "React-Firebase Application. Here users can Login and Sign up using email password or Google. Users can see services and can purchase them and the quantity of that service will automatically be updated. Admin can Add and Update services.",
     longDescription:
@@ -230,6 +235,7 @@ export const projects: Project[] = [
   },
   {
     id: 5,
+    slug: "figma-to-react-conversion",
     title: "Figma to React js",
     description: "Converted Client's Figma Design into React js and Tailwind CSS with Firebase Authentication and Functions. ",
     longDescription:
@@ -242,6 +248,7 @@ export const projects: Project[] = [
   },
   {
     id: 6,
+    slug: "pocket-class-platform",
     title: "Pocket Class",
     description: "PocketClass connects students to freelance instructors in sports, music, and the arts, streamlining scheduling, secure payments, and administrative tasks into one seamless experience.",
     longDescription:
@@ -255,6 +262,7 @@ export const projects: Project[] = [
   },
   {
     id: 7,
+    slug: "inventory-management-system",
     title: "Inventory-Management-System",
     description: " A Product Inventory System where users can enlist their products with Price, quantity, seller name and it will automatically calculate the total price according to price and quantity. Also, it can track record how many products have been sold and how much profit or loss have occurred",
     longDescription:

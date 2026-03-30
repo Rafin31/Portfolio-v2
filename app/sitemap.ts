@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next"
 import { getAllPosts } from "@/lib/blog"
+import { projects } from "@/data/portfolio"
 
 const BASE_URL = "https://asifhossain.dev"
 
@@ -11,6 +12,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(post.date),
     changeFrequency: "monthly",
     priority: 0.7,
+  }))
+
+  const projectEntries: MetadataRoute.Sitemap = projects.map((project) => ({
+    url: `${BASE_URL}/projects/${project.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.8,
   }))
 
   return [
@@ -32,6 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    ...projectEntries,
     ...blogEntries,
   ]
 }

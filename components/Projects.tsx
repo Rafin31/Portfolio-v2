@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react"
 import { motion, useInView, AnimatePresence, LayoutGroup } from "framer-motion"
+import Link from "next/link"
 import { projects, projectCategories, type ProjectCategory } from "@/data/portfolio"
 import { FiGithub, FiExternalLink } from "react-icons/fi"
 import { HiSparkles, HiArrowUpRight } from "react-icons/hi2"
@@ -251,9 +252,12 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
       {/* ── Card body ─────────────────────────────────────── */}
       <div className="p-5 flex flex-col flex-1 gap-3">
         <div className="flex items-start justify-between gap-2">
-          <h3 className={`font-heading font-semibold text-sm leading-snug transition-colors duration-300 ${hovered ? "text-accent-yellow" : "text-text-primary"}`}>
+          <Link
+            href={`/projects/${project.slug}`}
+            className={`font-heading font-semibold text-sm leading-snug transition-colors duration-300 hover:text-accent-yellow ${hovered ? "text-accent-yellow" : "text-text-primary"}`}
+          >
             {project.title}
-          </h3>
+          </Link>
           <motion.div
             animate={{ rotate: hovered ? 45 : 0, opacity: hovered ? 1 : 0.3 }}
             transition={{ duration: 0.25 }}
@@ -281,20 +285,29 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
         </div>
 
         <div className="flex items-center justify-between pt-3 mt-auto border-t border-border">
-          <a
-            href={project.github}
-            className="flex items-center gap-1.5 text-text-muted text-xs hover:text-accent-yellow transition-colors font-medium"
+          <div className="flex items-center gap-3">
+            <a
+              href={project.github}
+              className="flex items-center gap-1.5 text-text-muted text-xs hover:text-accent-yellow transition-colors font-medium"
+            >
+              <FiGithub className="w-3.5 h-3.5" />
+              Source
+            </a>
+            <a
+              href={project.demo}
+              className="flex items-center gap-1.5 text-text-muted text-xs hover:text-accent-cyan transition-colors font-medium"
+            >
+              <FiExternalLink className="w-3.5 h-3.5" />
+              Demo
+            </a>
+          </div>
+          <Link
+            href={`/projects/${project.slug}`}
+            className="flex items-center gap-1 text-accent-yellow text-xs font-semibold hover:gap-2 transition-all duration-200"
           >
-            <FiGithub className="w-3.5 h-3.5" />
-            Source Code
-          </a>
-          <a
-            href={project.demo}
-            className="flex items-center gap-1.5 text-text-muted text-xs hover:text-accent-cyan transition-colors font-medium"
-          >
-            Live Demo
-            <FiExternalLink className="w-3.5 h-3.5" />
-          </a>
+            Details
+            <HiArrowUpRight className="w-3 h-3" />
+          </Link>
         </div>
       </div>
     </motion.article>
