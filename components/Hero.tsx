@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import { motion } from "framer-motion"
 import { TypeAnimation } from "react-type-animation"
 import { personalInfo, stats } from "@/data/portfolio"
@@ -259,13 +258,16 @@ export default function Hero() {
               className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-accent-yellow/40 glow-yellow"
               style={{ zIndex: 1 }}
             >
-              {/* Profile photo */}
-              <Image
+              {/* Profile photo — save your photo as public/profile.jpg */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/profile.jpg"
                 alt="Asif Hossain"
-                fill
-                className="object-cover object-top"
-                priority
+                className="w-full h-full object-cover object-top"
+                onError={(e) => {
+                  // Fallback: hide broken image and show initials behind it
+                  e.currentTarget.style.display = "none"
+                }}
               />
             </motion.div>
 
