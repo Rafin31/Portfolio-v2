@@ -8,6 +8,19 @@ import { navLinks, pageLinks } from "@/data/portfolio"
 import { HiMenu, HiX } from "react-icons/hi"
 import { HiArrowDownTray } from "react-icons/hi2"
 
+function LogoMark() {
+  return (
+    <span className="flex items-center gap-1.5 font-heading tracking-tight select-none">
+      <span className="font-mono text-accent-cyan text-sm font-bold opacity-70">&lt;/&gt;</span>
+      <span className="font-black text-lg text-text-primary">
+        Asif
+      </span>
+      <span className="font-light text-lg text-accent-yellow">Hossain</span>
+      <span className="w-1.5 h-1.5 rounded-full bg-accent-yellow animate-pulse" />
+    </span>
+  )
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -66,18 +79,12 @@ export default function Navbar() {
           {/* Logo */}
           <button
             onClick={() => isHome ? handleNavClick("#home") : undefined}
-            className="font-heading font-bold text-xl tracking-tight"
+            className="flex items-center gap-2 group"
           >
             {isHome ? (
-              <>
-                <span className="text-accent-yellow">Asif </span>
-                <span className="text-accent-cyan">Hossain</span>
-              </>
+              <LogoMark />
             ) : (
-              <Link href="/">
-                <span className="text-accent-yellow">Asif </span>
-                <span className="text-accent-cyan">Hossain</span>
-              </Link>
+              <Link href="/"><LogoMark /></Link>
             )}
           </button>
 
@@ -108,6 +115,24 @@ export default function Navbar() {
             {/* Page route links */}
             {pageLinks.map((link) => {
               const isActive = pathname === link.href
+              const isHireMe = link.href === "/hire-me"
+
+              if (isHireMe) {
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`ml-1 px-4 py-1.5 rounded-full text-sm font-semibold border transition-all duration-200 ${
+                      isActive
+                        ? "bg-accent-yellow text-background border-accent-yellow"
+                        : "border-accent-yellow text-accent-yellow hover:bg-accent-yellow hover:text-background"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                )
+              }
+
               return (
                 <Link
                   key={link.href}
@@ -181,26 +206,38 @@ export default function Navbar() {
                 </motion.button>
               ))}
               {/* Page route links in mobile */}
-              {pageLinks.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: (navLinks.length + i) * 0.05 }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                      pathname === link.href
-                        ? "bg-accent-yellow/10 text-accent-yellow"
-                        : "text-text-muted hover:text-text-primary hover:bg-card"
-                    }`}
+              {pageLinks.map((link, i) => {
+                const isHireMe = link.href === "/hire-me"
+                return (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: (navLinks.length + i) * 0.05 }}
                   >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
+                    <Link
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`flex items-center justify-between px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                        isHireMe
+                          ? pathname === link.href
+                            ? "bg-accent-yellow text-background font-semibold"
+                            : "bg-accent-yellow/10 text-accent-yellow border border-accent-yellow/30 font-semibold"
+                          : pathname === link.href
+                            ? "bg-accent-yellow/10 text-accent-yellow"
+                            : "text-text-muted hover:text-text-primary hover:bg-card"
+                      }`}
+                    >
+                      {link.label}
+                      {isHireMe && (
+                        <span className="text-[10px] px-1.5 py-0.5 bg-accent-yellow/20 text-accent-yellow rounded font-mono">
+                          available
+                        </span>
+                      )}
+                    </Link>
+                  </motion.div>
+                )
+              })}
               <a
                 href="/Asif_Hossain_Resume.pdf"
                 download="Asif_Hossain_Resume.pdf"

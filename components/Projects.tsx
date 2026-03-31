@@ -3,6 +3,7 @@
 import { useRef, useState } from "react"
 import { motion, useInView, AnimatePresence, LayoutGroup } from "framer-motion"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { projects, projectCategories, type ProjectCategory } from "@/data/portfolio"
 import { FiGithub, FiExternalLink } from "react-icons/fi"
 import { HiSparkles, HiArrowUpRight } from "react-icons/hi2"
@@ -112,6 +113,7 @@ const FLOAT_VARIANTS = [
 
 function ProjectCard({ project }: { project: (typeof projects)[0] }) {
   const [hovered, setHovered] = useState(false)
+  const router = useRouter()
   const num = String(project.id).padStart(2, "0")
 
   // Show up to 4 floating tech tags (corner positions)
@@ -131,8 +133,9 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={() => router.push(`/projects/${project.slug}`)}
       whileHover={{ y: -4 }}
-      className={`group relative bg-card border rounded-2xl overflow-hidden flex flex-col transition-colors duration-300 ${
+      className={`group relative bg-card border rounded-2xl overflow-hidden flex flex-col transition-colors duration-300 cursor-pointer ${
         hovered
           ? "border-accent-yellow/50 shadow-2xl shadow-accent-yellow/10"
           : "border-border"
@@ -252,12 +255,9 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
       {/* ── Card body ─────────────────────────────────────── */}
       <div className="p-5 flex flex-col flex-1 gap-3">
         <div className="flex items-start justify-between gap-2">
-          <Link
-            href={`/projects/${project.slug}`}
-            className={`font-heading font-semibold text-sm leading-snug transition-colors duration-300 hover:text-accent-yellow ${hovered ? "text-accent-yellow" : "text-text-primary"}`}
-          >
+          <span className={`font-heading font-semibold text-sm leading-snug transition-colors duration-300 ${hovered ? "text-accent-yellow" : "text-text-primary"}`}>
             {project.title}
-          </Link>
+          </span>
           <motion.div
             animate={{ rotate: hovered ? 45 : 0, opacity: hovered ? 1 : 0.3 }}
             transition={{ duration: 0.25 }}
@@ -288,6 +288,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
           <div className="flex items-center gap-3">
             <a
               href={project.github}
+              onClick={(e) => e.stopPropagation()}
               className="flex items-center gap-1.5 text-text-muted text-xs hover:text-accent-yellow transition-colors font-medium"
             >
               <FiGithub className="w-3.5 h-3.5" />
@@ -295,19 +296,17 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
             </a>
             <a
               href={project.demo}
+              onClick={(e) => e.stopPropagation()}
               className="flex items-center gap-1.5 text-text-muted text-xs hover:text-accent-cyan transition-colors font-medium"
             >
               <FiExternalLink className="w-3.5 h-3.5" />
               Demo
             </a>
           </div>
-          <Link
-            href={`/projects/${project.slug}`}
-            className="flex items-center gap-1 text-accent-yellow text-xs font-semibold hover:gap-2 transition-all duration-200"
-          >
+          <span className="flex items-center gap-1 text-accent-yellow text-xs font-semibold">
             Details
             <HiArrowUpRight className="w-3 h-3" />
-          </Link>
+          </span>
         </div>
       </div>
     </motion.article>
