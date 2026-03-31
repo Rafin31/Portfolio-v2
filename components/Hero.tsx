@@ -5,6 +5,7 @@ import { TypeAnimation } from "react-type-animation"
 import { personalInfo, stats } from "@/data/portfolio"
 import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi"
 import { HiArrowDown } from "react-icons/hi"
+import { HiArrowDownTray } from "react-icons/hi2"
 
 // Animated floating particle dot
 function Particle({ x, y, delay, size }: { x: string; y: string; delay: number; size: number }) {
@@ -218,6 +219,15 @@ export default function Hero() {
             >
               Hire Me
             </button>
+            <a
+              href="/Asif_Hossain_Resume.pdf"
+              download="Asif_Hossain_Resume.pdf"
+              className="group relative flex items-center gap-2 px-6 py-3 bg-card border border-border text-text-muted font-medium rounded-xl hover:border-accent-yellow/40 hover:text-text-primary transition-all duration-200 overflow-hidden"
+            >
+              <span className="absolute inset-0 bg-accent-yellow/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              <HiArrowDownTray className="w-4 h-4 relative z-10 group-hover:text-accent-yellow transition-colors" />
+              <span className="relative z-10 text-sm">Download CV</span>
+            </a>
           </motion.div>
 
           {/* Stats row */}

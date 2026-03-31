@@ -6,7 +6,6 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { navLinks, pageLinks } from "@/data/portfolio"
 import { HiMenu, HiX } from "react-icons/hi"
-import { HiArrowDownTray } from "react-icons/hi2"
 
 function LogoMark() {
   return (
@@ -155,17 +154,7 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Download CV button (desktop) */}
-          <div className="hidden md:flex items-center gap-3">
-            <a
-              href="/Asif_Hossain_Resume.pdf"
-              download="Asif_Hossain_Resume.pdf"
-              className="flex items-center gap-2 px-4 py-2 border border-border text-text-muted text-sm font-medium rounded-lg hover:border-accent-yellow/40 hover:text-text-primary transition-colors duration-200"
-            >
-              <HiArrowDownTray className="w-4 h-4" />
-              CV
-            </a>
-          </div>
+          <div className="hidden md:flex items-center" />
 
           {/* Mobile hamburger */}
           <button
@@ -239,14 +228,6 @@ export default function Navbar() {
                   </motion.div>
                 )
               })}
-              <a
-                href="/Asif_Hossain_Resume.pdf"
-                download="Asif_Hossain_Resume.pdf"
-                className="flex items-center gap-2 mt-2 px-4 py-3 border border-border text-text-muted text-sm font-medium rounded-lg hover:border-accent-yellow/40 hover:text-text-primary transition-colors"
-              >
-                <HiArrowDownTray className="w-4 h-4" />
-                Download CV
-              </a>
             </div>
           </motion.div>
         )}
