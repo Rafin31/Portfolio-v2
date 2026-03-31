@@ -160,10 +160,10 @@ export default function Navbar() {
             <a
               href="/Asif_Hossain_Resume.pdf"
               download="Asif_Hossain_Resume.pdf"
-              className="flex items-center gap-2 px-4 py-2 bg-accent-yellow text-background text-sm font-semibold rounded-lg hover:bg-amber-400 transition-colors duration-200 glow-yellow-sm"
+              className="flex items-center gap-2 px-4 py-2 border border-border text-text-muted text-sm font-medium rounded-lg hover:border-accent-yellow/40 hover:text-text-primary transition-colors duration-200"
             >
               <HiArrowDownTray className="w-4 h-4" />
-              Download CV
+              CV
             </a>
           </div>
 
@@ -186,7 +186,8 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-surface/98 backdrop-blur-md border-b border-border overflow-hidden"
+            className="md:hidden bg-surface border-b border-border"
+            style={{ maxHeight: "calc(100vh - 64px)", overflowY: "auto" }}
           >
             <div className="px-4 py-4 flex flex-col gap-1">
               {navLinks.map((link, i) => (
@@ -241,7 +242,7 @@ export default function Navbar() {
               <a
                 href="/Asif_Hossain_Resume.pdf"
                 download="Asif_Hossain_Resume.pdf"
-                className="flex items-center gap-2 mt-2 px-4 py-3 bg-accent-yellow text-background text-sm font-semibold rounded-lg hover:bg-amber-400 transition-colors"
+                className="flex items-center gap-2 mt-2 px-4 py-3 border border-border text-text-muted text-sm font-medium rounded-lg hover:border-accent-yellow/40 hover:text-text-primary transition-colors"
               >
                 <HiArrowDownTray className="w-4 h-4" />
                 Download CV
