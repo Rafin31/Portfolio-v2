@@ -6,7 +6,7 @@ export const personalInfo = {
   name: "Asif Hossain",
   role: "Full-Stack Developer",
   tagline: "Building scalable web applications with modern technologies",
-  email: "asifhossain976@gmail.com",
+  email: "contact@asifhossain.dev",
   location: "Wollongong, NSW, Australia",
   github: "https://github.com/Rafin31",
   linkedin: "https://www.linkedin.com/in/asif-hossain-6982b81ba/",

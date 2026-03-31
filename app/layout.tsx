@@ -117,7 +117,7 @@ const jsonLd = {
   jobTitle: "Full-Stack Developer",
   description:
     "Full-Stack Developer specialising in React.js, Next.js, Node.js and cloud-based solutions. Based in Wollongong, Australia.",
-  email: "asifhossain976@gmail.com",
+  email: "contact@asifhossain.dev",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Wollongong",
