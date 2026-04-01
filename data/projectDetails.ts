@@ -382,6 +382,57 @@ export const projectDetails: Record<string, ProjectDetail> = {
     outcome:
       "Fully functional inventory system replacing manual spreadsheet workflows. Accurate real-time profit tracking with no data inconsistencies reported after deployment.",
   },
+
+  "claude-stats": {
+    slug: "claude-stats",
+    coverImage: "/claude-states/claude-states.png",
+    imageAlt: "Claude Stats dashboard showing token usage, costs and session history",
+    imageCredit: "Screenshot by Asif Hossain",
+    overview:
+      "Claude Stats is a self-hosted developer tool I built to solve a personal pain point: having no visibility into how many tokens I was burning through Claude Code sessions or how much it was costing me. The dashboard auto-detects your local Claude data directory, watches it for changes in real time, and visualises token usage, session history, costs, and productivity patterns — all without any configuration or external API calls.",
+    features: [
+      {
+        icon: "📊",
+        title: "270-Degree Usage Gauge",
+        description:
+          "Live arc gauge showing your current 5-hour rolling window consumption vs your plan limit. Colour shifts from green to red as you approach the cap.",
+      },
+      {
+        icon: "📅",
+        title: "Usage Calendar",
+        description:
+          "GitHub-style 52-week heatmap showing daily token consumption. Instantly reveals your busiest coding periods and usage trends over time.",
+      },
+      {
+        icon: "🔥",
+        title: "Productivity Heatmap",
+        description:
+          "7x24 grid mapping which hours and days you use Claude most. Helps you understand your peak productivity windows at a glance.",
+      },
+      {
+        icon: "🧩",
+        title: "Model Breakdown",
+        description:
+          "Pie chart breaking down token usage and estimated cost by model (Sonnet, Haiku, Opus) across all your sessions.",
+      },
+      {
+        icon: "💰",
+        title: "Subscription Value Card",
+        description:
+          "Compares what your usage would cost at pay-per-token API pricing vs your flat Pro subscription — shows exactly how much value you're getting.",
+      },
+      {
+        icon: "📋",
+        title: "Session History Table",
+        description:
+          "Full searchable log of every Claude Code session with timestamps, project, branch, token counts, and estimated cost per session.",
+      },
+    ],
+    challenge:
+      "The main challenge was building a reliable real-time file watcher that could parse Claude's JSONL session files incrementally without re-reading the entire history on every change. I used chokidar for efficient file watching and implemented a streaming parser that only processes new lines appended to each session file, keeping memory usage flat regardless of session history size.",
+    outcome:
+      "A working developer tool actively used for tracking Claude Code usage. Zero configuration needed — clone, install, and run. Published on GitHub as an open-source project for the broader Claude Code community.",
+  },
 }
 
 export function getProjectDetail(slug: string): ProjectDetail | null {

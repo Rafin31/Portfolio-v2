@@ -262,6 +262,20 @@ export const projects: Project[] = [
   },
   {
     id: 7,
+    slug: "claude-stats",
+    title: "Claude Stats Dashboard",
+    description: "A local dashboard for tracking Claude Code token usage, costs, and session history in real time. Built with Next.js, Recharts, and chokidar.",
+    longDescription:
+      "A self-hosted developer tool that gives you a live view of your Claude Code token consumption, session history, and estimated API costs. Built with Next.js App Router, Recharts for data visualisation, and chokidar for file watching — no config needed, it auto-detects your Claude data directory.",
+    category: ["fullstack"],
+    tech: ["Next.js", "React.js", "TypeScript", "TailwindCSS", "Recharts", "chokidar"],
+    github: "https://github.com/Rafin31/claude-stats",
+    demo: "https://github.com/Rafin31/claude-stats",
+    gradient: "from-indigo-500 via-violet-600 to-purple-700",
+    highlight: "Real-time token tracking",
+  },
+  {
+    id: 8,
     slug: "inventory-management-system",
     title: "Inventory-Management-System",
     description: " A Product Inventory System where users can enlist their products with Price, quantity, seller name and it will automatically calculate the total price according to price and quantity. Also, it can track record how many products have been sold and how much profit or loss have occurred",
