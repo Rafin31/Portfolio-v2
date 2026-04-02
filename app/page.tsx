@@ -2,12 +2,12 @@ import Navbar from "@/components/Navbar"
 import Hero from "@/components/Hero"
 import About from "@/components/About"
 import Skills from "@/components/Skills"
+import AISkills from "@/components/AISkills"
 import Experience from "@/components/Experience"
 import Projects from "@/components/Projects"
 import Testimonials from "@/components/Testimonials"
 import Contact from "@/components/Contact"
 import Footer from "@/components/Footer"
-import CustomCursor from "@/components/CustomCursor"
 import { projects } from "@/data/portfolio"
 
 const BASE_URL = "https://asifhossain.dev"
@@ -44,11 +44,11 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsJsonLd) }}
       />
       <main className="min-h-screen">
-        <CustomCursor />
         <Navbar />
         <Hero />
         <About />
         <Skills />
+        <AISkills />
         <Experience />
         <Projects />
         <Testimonials />

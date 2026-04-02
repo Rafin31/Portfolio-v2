@@ -523,12 +523,84 @@ export const stats = [
 ]
 
 // ============================================================
+// AI SKILLS
+// ============================================================
+export type AISkillCategory = "tools" | "apis" | "techniques"
+
+export const aiSkillCategories: { id: AISkillCategory; label: string }[] = [
+  { id: "tools", label: "AI Tools" },
+  { id: "apis", label: "APIs & SDKs" },
+  { id: "techniques", label: "Techniques" },
+]
+
+export interface AISkill {
+  name: string
+}
+
+export const aiSkills: Record<AISkillCategory, AISkill[]> = {
+  tools: [
+    { name: "Claude AI" },
+    { name: "ChatGPT" },
+    { name: "GitHub Copilot" },
+    { name: "Cursor IDE" },
+    { name: "v0 by Vercel" },
+    { name: "Bolt.new" },
+    { name: "Perplexity AI" },
+  ],
+  apis: [
+    { name: "Anthropic API" },
+    { name: "OpenAI API" },
+    { name: "Vercel AI SDK" },
+    { name: "LangChain" },
+    { name: "Hugging Face" },
+    { name: "Replicate" },
+  ],
+  techniques: [
+    { name: "Prompt Engineering" },
+    { name: "RAG Systems" },
+    { name: "Vibe Coding" },
+    { name: "AI Code Review" },
+    { name: "Chain-of-Thought" },
+    { name: "AI Debugging" },
+    { name: "Context Management" },
+  ],
+}
+
+export const aiCapabilities = [
+  {
+    id: 1,
+    title: "AI-Powered Web Apps",
+    description: "Full-stack apps with embedded AI hatbots, smart search, and intelligent content generation.",
+    color: "violet" as const,
+  },
+  {
+    id: 2,
+    title: "Prompt Engineering",
+    description: "Craft precise, reliable prompts that extract structured outputs from LLMs in production.",
+    color: "cyan" as const,
+  },
+  {
+    id: 3,
+    title: "Vibe Coding",
+    description: "Use AI as a pair programmer to ship production-quality features 10× faster.",
+    color: "amber" as const,
+  },
+  {
+    id: 4,
+    title: "API Integration",
+    description: "Connect Claude, GPT-4o, and other AI models to web apps through clean service layers.",
+    color: "emerald" as const,
+  },
+]
+
+// ============================================================
 // NAV LINKS
 // ============================================================
 export const navLinks = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "About" },
   { href: "#skills", label: "Skills" },
+  { href: "#ai", label: "AI" },
   { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
   { href: "#testimonials", label: "Testimonials" },
