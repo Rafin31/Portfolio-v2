@@ -1,12 +1,11 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import { projects } from "@/data/portfolio"
 import { getProjectDetail } from "@/data/projectDetails"
-import { shimmerDataURL } from "@/lib/shimmer"
+import ImageViewer from "@/components/ImageViewer"
 import { FiGithub, FiExternalLink, FiArrowLeft } from "react-icons/fi"
 import { HiSparkles } from "react-icons/hi2"
 
@@ -64,8 +63,6 @@ export default function ProjectPage({ params }: Props) {
     author: { "@type": "Person", name: "Asif Hossain", url: BASE_URL },
     url: project.demo !== "#" ? project.demo : undefined,
   }
-
-  const blur = shimmerDataURL(1400, 788)
 
   return (
     <>
@@ -163,23 +160,24 @@ export default function ProjectPage({ params }: Props) {
       <main className="bg-background pb-24">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Cover image */}
-          {detail?.coverImage && (
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-black/40 -mt-6 mb-14 border border-border">
-              <Image
-                src={detail.coverImage}
-                alt={detail.imageAlt}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1000px"
-                className="object-cover"
-                placeholder="blur"
-                blurDataURL={blur}
-                priority
-              />
-              {/* Credit overlay */}
-              <span className="absolute bottom-2 right-3 text-[10px] text-white/40 select-none">
-                {detail.imageCredit}
-              </span>
+          {/* Image gallery */}
+          {(project.imagekitFolder || detail?.coverImage) && (
+            <div className="-mt-6 mb-14">
+              {project.imagekitFolder ? (
+                /* Auto-discovers all snapshotN images from ImageKit folder */
+                <ImageViewer
+                  folder={project.imagekitFolder}
+                  alt={detail?.imageAlt ?? project.title}
+                  credit="Screenshot by Asif Hossain"
+                />
+              ) : (
+                /* Unsplash / static fallback */
+                <ImageViewer
+                  images={[detail!.coverImage]}
+                  alt={detail!.imageAlt}
+                  credit={detail!.imageCredit}
+                />
+              )}
             </div>
           )}
 

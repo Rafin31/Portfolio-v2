@@ -173,8 +173,10 @@ export interface Project {
   tech: string[]
   github: string
   demo: string
-  gradient: string // Tailwind gradient classes for placeholder image
+  gradient: string // Tailwind gradient classes for fallback / detail hero
   highlight?: string // Featured text
+  imagekitFolder?: string // Subfolder name in ImageKit "Portfolio Projects Images"
+  imagekitSnapshots?: number // How many snapshot images exist (snapshot1 … snapshotN)
 }
 
 export const projects: Project[] = [
@@ -191,6 +193,8 @@ export const projects: Project[] = [
     demo: "https://www.fiverr.com/users/rafin_31/portfolio/NjQ2NjA4OGY1OWYxNzUwMDAxNWIxNDY2",
     gradient: "from-amber-500 via-orange-600 to-red-700",
     highlight: "60% admin workload reduction",
+    imagekitFolder: "Medical Management System",
+    imagekitSnapshots: 1,
   },
   {
     id: 2,
@@ -205,6 +209,8 @@ export const projects: Project[] = [
     demo: "https://github.com/Rafin31/Assert-Frontend",
     gradient: "from-purple-600 via-violet-700 to-indigo-800",
     highlight: "+40% user engagement",
+    imagekitFolder: "Assert",
+    imagekitSnapshots: 2,
   },
   {
     id: 3,
@@ -213,11 +219,12 @@ export const projects: Project[] = [
     description: "Full-stack e-commerce store with Stripe payments, product management, and order tracking.",
     longDescription:
       "A feature-rich e-commerce platform with product catalogue, cart management, Stripe payment integration, order tracking, and admin dashboard. Built with Next.js for fast SSR and SEO.",
-    category: ["freelance", "fullstack", "backend"],
+    category: ["freelance", "fullstack", "backend", "frontend"],
     tech: ["Next.js", "Node.js", "MongoDB", "Stripe", "TailwindCSS"],
     github: "https://github.com/Rafin31/autoPartsClient",
     demo: "https://github.com/Rafin31/autoPartsClient",
     gradient: "from-emerald-500 via-teal-600 to-cyan-700",
+    imagekitFolder: "auto-parts"
   },
   {
     id: 4,
@@ -226,12 +233,13 @@ export const projects: Project[] = [
     description: "React-Firebase Application. Here users can Login and Sign up using email password or Google. Users can see services and can purchase them and the quantity of that service will automatically be updated. Admin can Add and Update services.",
     longDescription:
       "React-Firebase Application. Here users can Login and Sign up using email password or Google. Users can see services and can purchase them and the quantity of that service will automatically be updated. Admin can Add and Update services. Increased online orders by 40%.",
-    category: ["freelance", "fullstack", "backend"],
+    category: ["freelance", "fullstack", "backend", "frontend"],
     tech: ["React.js", "Node.js", "Firebase", "Firebase Auth"],
     github: "https://github.com/Rafin31/React-firebase-app",
     demo: "https://github.com/Rafin31/React-firebase-app",
     gradient: "from-rose-500 via-pink-600 to-fuchsia-700",
     highlight: "+40% online orders",
+    imagekitFolder:"Game-Coach-Platform"
   },
   {
     id: 5,
@@ -245,6 +253,8 @@ export const projects: Project[] = [
     github: "#",
     demo: "https://www.fiverr.com/users/rafin_31/portfolio/NjQ2NjEyZmMxNjhkYTAwMDAxOTAyZjE4",
     gradient: "from-blue-500 via-sky-600 to-indigo-700",
+    imagekitFolder: "Figma-react",
+    imagekitSnapshots: 1,
   },
   {
     id: 6,
@@ -253,12 +263,14 @@ export const projects: Project[] = [
     description: "PocketClass connects students to freelance instructors in sports, music, and the arts, streamlining scheduling, secure payments, and administrative tasks into one seamless experience.",
     longDescription:
       "Founded by a team who personally experienced the challenges of finding qualified instructors, from countless online searches to messy payment processes, we set out to build a better way. PocketClass connects students to freelance instructors in sports, music, and the arts, streamlining scheduling, secure payments, and administrative tasks into one seamless experience.",
-    category: ["freelance", "fullstack", "backend"],
+    category: ["freelance", "fullstack", "backend", "frontend"],
     tech: ["Next.js", "Node.js", "Socket.io", "MongoDB", "Firebase"],
     github: "#",
     demo: "https://www.pocketclass.ca/",
     gradient: "from-yellow-500 via-amber-600 to-orange-700",
     highlight: "+100% customer Satisfaction",
+    imagekitFolder: "PocketClass",
+    imagekitSnapshots: 1,
   },
   {
     id: 7,
@@ -273,6 +285,8 @@ export const projects: Project[] = [
     demo: "https://github.com/Rafin31/claude-stats",
     gradient: "from-indigo-500 via-violet-600 to-purple-700",
     highlight: "Real-time token tracking",
+    imagekitFolder: "Claude-States",
+    imagekitSnapshots: 1,
   },
   {
     id: 8,
@@ -281,11 +295,12 @@ export const projects: Project[] = [
     description: " A Product Inventory System where users can enlist their products with Price, quantity, seller name and it will automatically calculate the total price according to price and quantity. Also, it can track record how many products have been sold and how much profit or loss have occurred",
     longDescription:
       "A Product Inventory System where users can enlist their products with Price, quantity, seller name and it will automatically calculate the total price according to price and quantity. Also, it can track record how many products have been sold and how much profit or loss have occurred",
-    category: ["freelance", "fullstack", "backend"],
-    tech: ["Next.js", "PHP", "SQL"],
+    category: ["freelance", "fullstack", "backend", "frontend"],
+    tech: ["React.js", "PHP", "SQL", "REST API"],
     github: "#",
     demo: "https://github.com/Rafin31/Inventory-Management-System",
     gradient: "from-yellow-500 via-amber-600 to-orange-700",
+    imagekitFolder:"Inventory-Management-System"
   },
 ]
 

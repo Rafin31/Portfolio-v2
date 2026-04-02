@@ -12,6 +12,7 @@ export interface ProjectDetail {
   coverImage: string
   imageAlt: string
   imageCredit: string
+  screenshots?: string[] // Additional ImageKit snapshot URLs shown in gallery
   overview: string
   features: Feature[]
   challenge: string
@@ -22,9 +23,9 @@ export const projectDetails: Record<string, ProjectDetail> = {
   "medical-supplier-management-system": {
     slug: "medical-supplier-management-system",
     coverImage:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1400&q=80&auto=format&fit=crop",
-    imageAlt: "Medical management system dashboard on a computer screen",
-    imageCredit: "Photo by CDC on Unsplash",
+      "https://ik.imagekit.io/zqm3n6ufa/Portfolio%20Projects%20Images/Medical%20Management%20System/snapshot1",
+    imageAlt: "Medical Supplier Management System dashboard screenshot",
+    imageCredit: "Screenshot by Asif Hossain",
     overview:
       "Mendoza Brothers Holdings needed to replace a patchwork of spreadsheets and email chains with a centralised, secure web platform for managing their medical supply chain. The system needed to support multiple user roles, handle bulk product data efficiently, and give management real-time visibility over orders and staff activity. I designed and built the entire platform from scratch — database schema, REST API, React UI, and deployment infrastructure.",
     features: [

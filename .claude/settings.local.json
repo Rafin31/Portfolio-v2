@@ -4,7 +4,9 @@
       "Bash(npm install:*)",
       "Bash(npm run:*)",
       "Bash(node -e \"const hi2 = require\\(''react-icons/hi2''\\); console.log\\(Object.keys\\(hi2\\).filter\\(k => k.startsWith\\(''HiC''\\)\\).join\\('', ''\\)\\)\")",
-      "Bash(node -e \"const si = require\\(''react-icons/si''\\); const keys = Object.keys\\(si\\); console.log\\(''SiCss3:'', keys.includes\\(''SiCss3''\\)\\); console.log\\(''SiCss:'', keys.filter\\(k=>k.startsWith\\(''SiCss''\\)\\).join\\('', ''\\)\\); console.log\\(''SiAmazon:'', keys.filter\\(k=>k.startsWith\\(''SiAmazon''\\)\\).join\\('', ''\\)\\)\")"
+      "Bash(node -e \"const si = require\\(''react-icons/si''\\); const keys = Object.keys\\(si\\); console.log\\(''SiCss3:'', keys.includes\\(''SiCss3''\\)\\); console.log\\(''SiCss:'', keys.filter\\(k=>k.startsWith\\(''SiCss''\\)\\).join\\('', ''\\)\\); console.log\\(''SiAmazon:'', keys.filter\\(k=>k.startsWith\\(''SiAmazon''\\)\\).join\\('', ''\\)\\)\")",
+      "WebSearch",
+      "Bash(npx tsc:*)"
     ]
   }
 }

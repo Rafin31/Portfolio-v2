@@ -2,9 +2,12 @@
 
 import { useRef, useState } from "react"
 import { motion, useInView, AnimatePresence, LayoutGroup } from "framer-motion"
+import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { projects, projectCategories, type ProjectCategory } from "@/data/portfolio"
+import { ikProjectUrl, ikLoader } from "@/lib/imagekit"
+import { shimmerDataURL } from "@/lib/shimmer"
 import { FiGithub, FiExternalLink } from "react-icons/fi"
 import { HiSparkles, HiArrowUpRight } from "react-icons/hi2"
 
@@ -112,7 +115,9 @@ const FLOAT_VARIANTS = [
 ]
 
 function ProjectCard({ project }: { project: (typeof projects)[0] }) {
-  const [hovered, setHovered] = useState(false)
+  const [hovered,   setHovered]   = useState(false)
+  const [imgLoaded, setImgLoaded] = useState(false)
+  const [imgError,  setImgError]  = useState(false)
   const router = useRouter()
   const num = String(project.id).padStart(2, "0")
 
@@ -151,7 +156,37 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
       </div>
 
       {/* ── Rich preview area ──────────────────────────────── */}
-      <div className={`relative h-48 bg-gradient-to-br ${project.gradient} overflow-hidden flex-shrink-0`}>
+      {/* gradient = letterbox colour when object-contain leaves space */}
+      <div className={`relative aspect-[16/10] bg-gradient-to-br ${project.gradient} overflow-hidden flex-shrink-0`}>
+
+        {/* Shimmer skeleton — visible while image is fetching */}
+        {project.imagekitFolder && !imgLoaded && !imgError && (
+          <div
+            className="absolute inset-0 z-10"
+            style={{
+              background: "linear-gradient(90deg,rgba(9,9,15,0.85) 25%,rgba(30,30,58,0.9) 50%,rgba(9,9,15,0.85) 75%)",
+              backgroundSize: "200% 100%",
+              animation: "shimmer 1.8s ease-in-out infinite",
+            }}
+          />
+        )}
+
+        {/* Real screenshot — fades in once loaded */}
+        {project.imagekitFolder && !imgError && (
+          <Image
+            loader={ikLoader}
+            src={ikProjectUrl(project.imagekitFolder, "snapshot1")}
+            alt={`${project.title} screenshot`}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+            className={`object-contain transition-opacity duration-700 ${imgLoaded ? "opacity-100" : "opacity-0"}`}
+            onLoad={() => setImgLoaded(true)}
+            onError={() => setImgError(true)}
+          />
+        )}
+
+        {/* Bottom vignette keeps text/tags readable over any background */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
         {/* Dot-grid pattern (replaces plain line grid) */}
         <div
@@ -162,11 +197,13 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
           }}
         />
 
-        {/* Radial vignette so edges are darker */}
+        {/* Stronger overlay when showing a real screenshot so text stays readable */}
         <div
           className="absolute inset-0"
           style={{
-            background: "radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0,0,0,0.35) 100%)",
+            background: project.imagekitFolder && !imgError
+              ? "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%)"
+              : "radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0,0,0,0.35) 100%)",
           }}
         />
 
@@ -190,7 +227,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
         {floatingTags.map((tech, i) => (
           <motion.div
             key={tech}
-            className="absolute text-[10px] bg-black/50 backdrop-blur-md border border-white/20 rounded-full px-2.5 py-[3px] text-white/90 font-mono whitespace-nowrap select-none"
+            className="absolute text-[10px] bg-black/70 backdrop-blur-md border border-white/20 rounded-full px-2.5 py-[3px] text-white font-mono whitespace-nowrap select-none"
             style={TAG_SLOTS[i]}
             animate={{ y: FLOAT_VARIANTS[i].y }}
             transition={{
@@ -209,10 +246,12 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
           {num}
         </div>
 
-        {/* Center: title + highlight */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10">
-          <div className="font-heading font-bold text-base text-white drop-shadow-lg leading-snug max-w-[160px]">
-            {project.title}
+        {/* Center: title + highlight — always wrapped in a dark pill for readability */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center z-10">
+          <div className="bg-black/55 backdrop-blur-sm rounded-xl px-3 py-2 max-w-[190px]">
+            <div className="font-heading font-bold text-sm text-white leading-snug">
+              {project.title}
+            </div>
           </div>
           {project.highlight && (
             <motion.div
