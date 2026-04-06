@@ -3,6 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import { MDXRemote } from "next-mdx-remote/rsc"
+import remarkGfm from "remark-gfm"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import { getPostBySlug, getAllSlugs } from "@/lib/blog"
@@ -144,7 +145,10 @@ export default function BlogPostPage({ params }: Props) {
 
           {/* MDX Content */}
           <div className="mdx-content">
-            <MDXRemote source={post.content} />
+            <MDXRemote
+              source={post.content}
+              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+            />
           </div>
 
           {/* Divider */}

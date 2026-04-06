@@ -319,6 +319,9 @@ body {
   border-collapse: collapse;
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mdx-content th {
