@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import { getPostBySlug, getAllSlugs } from "@/lib/blog"
+import { shimmerDataURL } from "@/lib/shimmer"
 
 const BASE_URL = "https://asifhossain.dev"
 
@@ -119,6 +121,22 @@ export default function BlogPostPage({ params }: Props) {
               <span>·</span>
               <time dateTime={post.date}>{formatDate(post.date)}</time>
             </div>
+
+            {/* Cover image */}
+            {post.coverImage && (
+              <div className="relative mt-8 rounded-2xl overflow-hidden aspect-[16/7]">
+                <Image
+                  src={post.coverImage}
+                  alt={post.title}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  placeholder="blur"
+                  blurDataURL={shimmerDataURL(768, 336)}
+                  className="object-cover"
+                />
+              </div>
+            )}
           </header>
 
           {/* Divider */}

@@ -13,6 +13,7 @@ export interface BlogPostMeta {
   readTime: string
   category: string
   author: string
+  coverImage?: string
 }
 
 export interface BlogPost extends BlogPostMeta {
@@ -35,6 +36,7 @@ function parsePostFile(
       readTime: typeof data.readTime === "string" ? data.readTime : "5 min read",
       category: typeof data.category === "string" ? data.category : "Development",
       author: typeof data.author === "string" ? data.author : "Asif Hossain",
+      coverImage: typeof data.coverImage === "string" ? data.coverImage : undefined,
       content,
     }
   } catch (err) {

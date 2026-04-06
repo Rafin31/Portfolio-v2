@@ -1,0 +1,187 @@
+---
+title: "Next.js Performance Optimization: 7 Techniques That Actually Work in 2026"
+date: "2026-04-01"
+description: "Stop losing users to slow load times. These 7 Next.js performance techniques will cut your LCP, reduce JavaScript bundle size, and give you a near-perfect Lighthouse score."
+keywords: ["nextjs performance optimization", "nextjs 14 speed", "core web vitals nextjs", "lighthouse score nextjs", "react performance 2026", "nextjs bundle size", "web performance australia"]
+readTime: "8 min read"
+category: "Web Development"
+author: "Asif Hossain"
+coverImage: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=900&q=80"
+---
+
+Page speed is no longer just a developer vanity metric. Google uses Core Web Vitals as a ranking factor, and studies consistently show that every 100ms delay in load time costs measurable conversion rate drops.
+
+I've optimised dozens of Next.js apps for Australian clients — from small business websites to high-traffic SaaS platforms. Here are the seven techniques that have the highest impact every time.
+
+## 1. Dynamic Imports for Below-the-Fold Components
+
+The most underused performance tool in Next.js is `next/dynamic`. By default, every component you import gets bundled into your initial JavaScript payload — even components the user won't see for several seconds.
+
+**Before:**
+```tsx
+import HeavyChart from "@/components/HeavyChart"
+import Testimonials from "@/components/Testimonials"
+```
+
+**After:**
+```tsx
+import dynamic from "next/dynamic"
+
+const HeavyChart = dynamic(() => import("@/components/HeavyChart"), {
+  loading: () => <div className="h-64 animate-pulse bg-surface rounded-xl" />,
+})
+
+const Testimonials = dynamic(() => import("@/components/Testimonials"))
+```
+
+For Framer Motion-heavy components (orbital animations, parallax effects, etc.), this can shave **200–400KB** from your initial bundle.
+
+**Rule of thumb:** if a component uses `"use client"` and lives below the fold, it should be dynamically imported.
+
+## 2. Set `priority` on Your Hero Image
+
+Next.js `<Image>` defaults to lazy loading every image. That's great for images below the fold — but terrible for your hero/header image, which is almost always the Largest Contentful Paint (LCP) element.
+
+```tsx
+<Image
+  src="/hero.jpg"
+  alt="Hero"
+  fill
+  priority  // ← preloads the image, significantly improves LCP
+  sizes="100vw"
+/>
+```
+
+Adding `priority` tells Next.js to add a `<link rel="preload">` in the document `<head>`, so the browser starts fetching the image before it even parses the component.
+
+**Impact: typically 0.5–1.5s improvement in LCP.**
+
+## 3. Use `display: "swap"` for Google Fonts
+
+Next.js handles Google Fonts automatically via `next/font/google`. Make sure you're using `display: "swap"` so text is visible while the custom font loads:
+
+```typescript
+import { Inter, Space_Grotesk } from "next/font/google"
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",  // ← critical
+})
+```
+
+This prevents the flash of invisible text (FOIT) which hurts both CLS (Cumulative Layout Shift) and perceived performance.
+
+## 4. Add `sizes` to Every Next.js Image
+
+The `sizes` prop tells the browser which image width to request at each breakpoint. Without it, Next.js requests a full-width image even for a small card thumbnail.
+
+```tsx
+<Image
+  src={projectImage}
+  alt="Project screenshot"
+  fill
+  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+/>
+```
+
+This triggers responsive image behaviour via the `srcset` attribute, so mobile users download a 400px image instead of a 1200px one. **Bandwidth saved: 60–80% on mobile.**
+
+## 5. Enable Image Format Optimisation in next.config
+
+Next.js can serve modern image formats (WebP, AVIF) automatically via its Image Optimization API. Configure it explicitly for best results:
+
+```javascript
+// next.config.mjs
+const nextConfig = {
+  images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 86400, // cache optimised images for 24 hours
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "ik.imagekit.io" },
+    ],
+  },
+}
+```
+
+AVIF is 50% smaller than WebP and 80% smaller than JPEG at similar quality. Browsers that don't support AVIF fall back to WebP, and then JPEG — Next.js handles this automatically.
+
+## 6. Reduce Framer Motion's JavaScript Cost
+
+Framer Motion is fantastic for animations, but it adds ~60KB to your bundle. Here are two ways to reduce the cost:
+
+**a) Import only what you need:**
+```tsx
+// Bad — imports the whole library
+import { motion, AnimatePresence, useScroll } from "framer-motion"
+
+// Better — tree-shakes unused exports
+import { motion } from "framer-motion"
+```
+
+**b) Use `useInView` with `once: true` to prevent re-triggering animations:**
+```tsx
+const ref = useRef(null)
+const isInView = useInView(ref, { once: true, margin: "-80px" })
+
+return (
+  <motion.div
+    ref={ref}
+    initial={{ opacity: 0, y: 30 }}
+    animate={isInView ? { opacity: 1, y: 0 } : {}}
+    transition={{ duration: 0.5 }}
+  >
+    ...
+  </motion.div>
+)
+```
+
+This ensures animations fire once when the element enters the viewport, then stop — preventing unnecessary re-renders as the user scrolls.
+
+## 7. Streaming with React Suspense for Slow Data
+
+If any component on your page fetches data (e.g., blog posts, portfolio projects, testimonials from a CMS), wrap it in a `<Suspense>` boundary so the rest of the page renders immediately:
+
+```tsx
+import { Suspense } from "react"
+
+export default function Page() {
+  return (
+    <main>
+      <Hero />  {/* renders immediately */}
+      <Suspense fallback={<TestimonialsSkeleton />}>
+        <Testimonials />  {/* fetches data without blocking Hero */}
+      </Suspense>
+    </main>
+  )
+}
+```
+
+Without Suspense, a slow data fetch blocks the entire page from rendering. With it, users see your hero section in milliseconds while the slower parts load in the background.
+
+## Measuring the Results
+
+After applying these techniques, run:
+
+- **Lighthouse** in Chrome DevTools (aim for 90+ on all metrics)
+- **PageSpeed Insights** at `pagespeed.web.dev` (tests real-world conditions)
+- **Vercel Analytics** (if deploying to Vercel) for field data from real users
+
+A well-optimised Next.js portfolio or SaaS app should score **95+ on Performance** with these changes applied.
+
+## Summary
+
+| Technique | Primary Benefit |
+|---|---|
+| Dynamic imports | Reduce initial JS bundle |
+| `priority` on hero image | Improve LCP |
+| Font `display: swap` | Prevent invisible text |
+| `sizes` on images | Reduce image bandwidth |
+| AVIF/WebP formats | Smaller image files |
+| Framer Motion best practices | Reduce animation overhead |
+| Suspense streaming | Prevent data-fetch blocking |
+
+Performance optimisation is one of the highest-ROI investments you can make in a web application. If your Next.js site is feeling sluggish and you want an expert to diagnose and fix it, [get in touch](/#contact).
+
+*Asif Hossain is a full-stack developer based in Wollongong, NSW. He specialises in building high-performance React and Next.js applications for Australian and global clients.*

@@ -1,14 +1,17 @@
+import dynamic from "next/dynamic"
 import Navbar from "@/components/Navbar"
 import Hero from "@/components/Hero"
-import About from "@/components/About"
-import Skills from "@/components/Skills"
-import AISkills from "@/components/AISkills"
-import Experience from "@/components/Experience"
-import Projects from "@/components/Projects"
-import Testimonials from "@/components/Testimonials"
-import Contact from "@/components/Contact"
-import Footer from "@/components/Footer"
 import { projects } from "@/data/portfolio"
+
+// Below-the-fold: defer these to reduce initial JS bundle
+const About       = dynamic(() => import("@/components/About"))
+const Skills      = dynamic(() => import("@/components/Skills"))
+const AISkills    = dynamic(() => import("@/components/AISkills"))
+const Experience  = dynamic(() => import("@/components/Experience"))
+const Projects    = dynamic(() => import("@/components/Projects"))
+const Testimonials = dynamic(() => import("@/components/Testimonials"))
+const Contact     = dynamic(() => import("@/components/Contact"))
+const Footer      = dynamic(() => import("@/components/Footer"))
 
 const BASE_URL = "https://asifhossain.dev"
 

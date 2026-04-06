@@ -1,0 +1,258 @@
+---
+title: "Building AI-Powered Web Apps with Next.js and the Claude API in 2026"
+date: "2026-03-20"
+description: "A practical guide to integrating Anthropic's Claude API into a Next.js 14 app — from streaming responses to building a real AI feature your users will love."
+keywords: ["Claude API Next.js", "build AI web app 2026", "Anthropic Claude API tutorial", "nextjs AI integration", "AI chatbot nextjs", "anthropic sdk react", "AI full stack developer australia"]
+readTime: "9 min read"
+category: "AI Development"
+author: "Asif Hossain"
+coverImage: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&q=80"
+---
+
+AI is no longer a nice-to-have feature — it's becoming the baseline expectation for modern web applications. If you're a Next.js developer in 2026, knowing how to wire up a language model API is as essential as knowing how to fetch from a REST endpoint.
+
+In this post I'll show you how to integrate Anthropic's Claude API into a Next.js 14 (App Router) project, using the official `@anthropic-ai/sdk` package — including streaming responses, proper error handling, and a clean UI pattern you can drop into a real product.
+
+## Why Claude?
+
+Before we get into the code, a quick word on why I personally reach for Claude first.
+
+Claude produces long, coherent, accurate responses. It's particularly strong for tasks like summarisation, code generation, document Q&A, and writing — which maps to most of the AI features I'm asked to build for clients. The API is clean, the pricing is competitive, and Anthropic has a strong track record on safety and reliability.
+
+That said, the pattern below works almost identically with OpenAI's API — the concepts transfer.
+
+## Project Setup
+
+Start with a fresh Next.js 14 app (or add this to an existing one):
+
+```bash
+npx create-next-app@latest my-ai-app --typescript --tailwind --app
+cd my-ai-app
+npm install @anthropic-ai/sdk
+```
+
+Add your API key to `.env.local`:
+
+```
+ANTHROPIC_API_KEY=sk-ant-...
+```
+
+Never expose this key to the browser. We'll call the API from a **Route Handler** (server-side) only.
+
+## Creating the API Route
+
+Create `app/api/chat/route.ts`:
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk"
+import { NextRequest } from "next/server"
+
+const client = new Anthropic()
+
+export async function POST(req: NextRequest) {
+  const { message } = await req.json()
+
+  if (!message || typeof message !== "string") {
+    return new Response("Missing message", { status: 400 })
+  }
+
+  // Stream the response back to the browser
+  const stream = await client.messages.stream({
+    model: "claude-opus-4-6",
+    max_tokens: 1024,
+    messages: [{ role: "user", content: message }],
+  })
+
+  // Return a ReadableStream so the UI can show text as it arrives
+  const readableStream = new ReadableStream({
+    async start(controller) {
+      for await (const chunk of stream) {
+        if (
+          chunk.type === "content_block_delta" &&
+          chunk.delta.type === "text_delta"
+        ) {
+          controller.enqueue(new TextEncoder().encode(chunk.delta.text))
+        }
+      }
+      controller.close()
+    },
+  })
+
+  return new Response(readableStream, {
+    headers: { "Content-Type": "text/plain; charset=utf-8" },
+  })
+}
+```
+
+This route streams tokens back to the browser as Claude generates them — exactly like you see in Claude.ai itself.
+
+## Building the Chat UI
+
+Create `app/chat/page.tsx`:
+
+```tsx
+"use client"
+
+import { useState, useRef, useEffect } from "react"
+
+interface Message {
+  role: "user" | "assistant"
+  content: string
+}
+
+export default function ChatPage() {
+  const [messages, setMessages] = useState<Message[]>([])
+  const [input, setInput] = useState("")
+  const [loading, setLoading] = useState(false)
+  const bottomRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, [messages])
+
+  async function sendMessage() {
+    if (!input.trim() || loading) return
+
+    const userMessage = input.trim()
+    setInput("")
+    setMessages((prev) => [...prev, { role: "user", content: userMessage }])
+    setLoading(true)
+
+    // Add empty assistant message to stream into
+    setMessages((prev) => [...prev, { role: "assistant", content: "" }])
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage }),
+      })
+
+      const reader = res.body!.getReader()
+      const decoder = new TextDecoder()
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        const chunk = decoder.decode(value)
+
+        // Append chunk to the last message
+        setMessages((prev) => {
+          const updated = [...prev]
+          updated[updated.length - 1] = {
+            ...updated[updated.length - 1],
+            content: updated[updated.length - 1].content + chunk,
+          }
+          return updated
+        })
+      }
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="flex flex-col h-screen max-w-2xl mx-auto p-4">
+      <div className="flex-1 overflow-y-auto space-y-4 py-4">
+        {messages.map((msg, i) => (
+          <div
+            key={i}
+            className={`p-4 rounded-xl text-sm whitespace-pre-wrap ${
+              msg.role === "user"
+                ? "bg-blue-500/10 text-blue-100 ml-8"
+                : "bg-card text-text-primary mr-8"
+            }`}
+          >
+            {msg.content}
+          </div>
+        ))}
+        <div ref={bottomRef} />
+      </div>
+
+      <form
+        onSubmit={(e) => { e.preventDefault(); sendMessage() }}
+        className="flex gap-2 border-t border-border pt-4"
+      >
+        <input
+          className="flex-1 bg-surface border border-border rounded-xl px-4 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-yellow"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Ask Claude anything..."
+          disabled={loading}
+        />
+        <button
+          type="submit"
+          disabled={loading || !input.trim()}
+          className="px-4 py-2 bg-accent-yellow text-background font-semibold rounded-xl text-sm disabled:opacity-50"
+        >
+          {loading ? "..." : "Send"}
+        </button>
+      </form>
+    </div>
+  )
+}
+```
+
+## Giving Claude a System Prompt
+
+For real products you almost always want a system prompt — it defines Claude's persona and scope. Update the route:
+
+```typescript
+const stream = await client.messages.stream({
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  system: `You are a helpful assistant for Acme Corp. 
+Answer questions about our products only. 
+Be concise, friendly, and professional.`,
+  messages: [{ role: "user", content: message }],
+})
+```
+
+This is the key difference between a demo and a real product. A well-crafted system prompt dramatically improves output quality.
+
+## Maintaining Conversation History
+
+The example above sends only the latest message. For real chat you need to send the full history:
+
+```typescript
+// In your API route, accept a messages array instead
+const { messages } = await req.json()
+
+const stream = await client.messages.stream({
+  model: "claude-opus-4-6",
+  max_tokens: 1024,
+  system: "You are a helpful assistant.",
+  messages, // Full conversation history
+})
+```
+
+On the client, pass `messages` from state (excluding any empty streaming messages) with each request.
+
+## Production Checklist
+
+Before going live:
+
+- **Rate limiting** — add a simple IP-based rate limiter (e.g. `upstash/ratelimit`) on the route
+- **Input sanitisation** — cap message length server-side to prevent abuse
+- **Error boundaries** — wrap the chat component so a network error doesn't crash the whole page
+- **Model selection** — `claude-haiku-4-5-20251001` is significantly cheaper for high-volume consumer apps; use `claude-opus-4-6` for quality-critical tasks
+- **Cost monitoring** — set a usage alert in the Anthropic console on day one
+
+## What to Build Next
+
+Once you have a basic integration working, here are the features I add to most client projects:
+
+1. **Document Q&A** — accept file uploads, extract text, pass it as context in the system prompt
+2. **Structured output** — ask Claude to return JSON and parse it for form-filling, categorisation, or data extraction features
+3. **Function calling** — use tools to let Claude trigger actions in your app (search a database, send an email, etc.)
+4. **Semantic caching** — cache similar questions to cut API costs by up to 80%
+
+## Final Thoughts
+
+The barrier to shipping AI features in 2026 is lower than ever. With Next.js App Router and the Anthropic SDK, you can go from zero to a streaming AI feature in under an hour. The hard part is the product thinking — deciding *what* to build, where it genuinely adds value, and how to make it feel natural.
+
+If you're looking to add AI features to your web product or want a developer who can handle the full stack — front-end, API integration, and deployment — [get in touch](/#contact).
+
+*Asif Hossain is a full-stack developer based in Wollongong, NSW, with hands-on experience building AI-powered web applications using the Claude API, OpenAI, and the Vercel AI SDK.*
