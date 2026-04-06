@@ -16,7 +16,9 @@ export const metadata: Metadata = {
     "fullstack developer blog wollongong",
     "web development tips australia",
     "nextjs developer blog",
-    "ai web development 2025",
+    "ai web development 2026",
+    "website cost australia 2026",
+    "small business website australia",
   ],
   alternates: {
     canonical: "https://asifhossain.dev/blog",
@@ -64,7 +66,7 @@ export default function BlogPage() {
             </h1>
             <p className="text-text-muted text-lg max-w-2xl mx-auto">
               Articles on full-stack development, AI integration, web
-              technologies, and freelancing in Australia — written by a developer
+              technologies, and freelancing in Australia. Written by a developer
               based in Wollongong, NSW.
             </p>
           </div>

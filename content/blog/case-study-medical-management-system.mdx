@@ -2,15 +2,18 @@
 title: "Case Study: Building a Medical Supplier System That Cut Admin Work by 60%"
 date: "2026-02-10"
 description: "A deep-dive into building a full-scale Medical Supplier Management System with React.js, Node.js, and MongoDB, including the engineering decisions that made it work for a US healthcare client."
-keywords: ["mern stack developer", "react nodejs case study", "fullstack developer australia", "web app development case study", "medical supplier management system", "react developer for hire"]
+keywords: ["mern stack developer", "react nodejs case study", "fullstack developer australia", "web app development case study", "medical supplier management system", "react developer for hire", "custom web application australia"]
 readTime: "8 min read"
 category: "Case Study"
 author: "Asif Hossain"
+coverImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80"
 ---
 
-One of the most technically and commercially significant projects I've delivered was a **Medical Supplier Management System** built for Mendoza Brothers Holdings, LLC, a US-based medical supply company.
+One of the most technically and commercially significant projects I have delivered was a **Medical Supplier Management System** built for Mendoza Brothers Holdings, LLC, a US-based medical supply company.
 
-This post walks through the problem, the architecture, the challenges, and the measurable outcomes. If you're a business owner trying to understand what a custom web application can do for your operations, or a developer interested in real-world MERN stack architecture, this is for you.
+This post walks through the problem, the architecture, the challenges, and the measurable outcomes. If you are a business owner trying to understand what a custom web application can do for your operations, or a developer interested in real-world MERN stack architecture, this is for you.
+
+Want to know how much a project like this costs? See my guide on [web development pricing for Australian businesses](/blog/website-cost-australia-2026).
 
 ## The Client and the Problem
 
@@ -38,13 +41,15 @@ The client application was built in React.js with a focus on reusable components
 - **Real-time updates** via Socket.io (no page refresh needed to see new data)
 - **Bulk upload UI**: a drag-and-drop Excel import interface that parses and validates data before submission
 
+If you are wondering whether React or Next.js is right for your project, I have written a [plain-language guide comparing the two](/blog/nextjs-react-web-development-australia).
+
 ### Backend: Node.js + Express with JWT Auth and RBAC
 
 The API layer handled all business logic. The two most critical features were:
 
 **JWT Authentication**: Every request includes a signed token. The server validates the token and extracts the user's role before processing any request. No token, no access.
 
-**Role-Based Access Control (RBAC)**: I implemented a middleware layer that sits between routes and handlers. Each route is decorated with the minimum role required to access it. This means a manager can't accidentally delete a supplier record they shouldn't touch, and junior staff can't access billing data.
+**Role-Based Access Control (RBAC)**: I implemented a middleware layer that sits between routes and handlers. Each route is decorated with the minimum role required to access it. This means a manager cannot accidentally delete a supplier record they should not touch, and junior staff cannot access billing data.
 
 ### Database: MongoDB with Schema Design for Flexibility
 
@@ -67,15 +72,15 @@ Before this feature, entering 500 products took half a day. After: under 5 minut
 
 ## Challenges and How I Solved Them
 
-### Challenge 1: Handling large bulk uploads without timeouts
+### Challenge 1: Handling Large Bulk Uploads Without Timeouts
 
 When uploading thousands of rows, a naive implementation blocks the request thread and times out. I solved this by processing uploads in chunks asynchronously, sending progress updates back to the client via Socket.io. The user sees a real-time progress bar instead of a spinner.
 
-### Challenge 2: Keeping the RBAC system maintainable
+### Challenge 2: Keeping the RBAC System Maintainable
 
-Access control rules have a tendency to become a tangled mess as requirements grow. I designed the RBAC as a centralized configuration object, a single source of truth for which roles can perform which actions. Adding a new role or changing permissions requires editing one file, not hunting through dozens of route handlers.
+Access control rules have a tendency to become a tangled mess as requirements grow. I designed the RBAC as a centralised configuration object, a single source of truth for which roles can perform which actions. Adding a new role or changing permissions requires editing one file, not hunting through dozens of route handlers.
 
-### Challenge 3: Cross-timezone collaboration
+### Challenge 3: Cross-Timezone Collaboration
 
 The client was in Florida; I was in Wollongong. A 15-hour time difference. I solved this with aggressive async communication: detailed Loom video walkthroughs for every major feature, written handover notes for each sprint, and scheduled weekly calls during the brief overlap window. The project ran on Agile/Scrum methodology with 2-week sprints throughout.
 
@@ -90,12 +95,12 @@ After 18 months of development and iteration:
 
 ## What This Shows for Australian Businesses
 
-Custom software built to your exact workflows will always outperform off-the-shelf tools for complex operations. The Mendoza Brothers system isn't a generic product. It's purpose-built for their supply chain, their team structure, and their data.
+Custom software built to your exact workflows will always outperform off-the-shelf tools for complex operations. The Mendoza Brothers system is not a generic product. It is purpose-built for their supply chain, their team structure, and their data.
 
 If your business is running on spreadsheets and manual processes, a well-architected web application can transform your operations. The investment pays for itself in staff time alone.
 
 ## Want Something Similar Built?
 
-If this sounds like the kind of problem you're trying to solve, whether you're in Wollongong, Sydney, or anywhere in Australia, I'd be glad to scope it with you.
+If this sounds like the kind of problem you are trying to solve, whether you are in Wollongong, Sydney, or anywhere in Australia, I would be glad to scope it with you.
 
-[View my services](/hire-me) or [get in touch directly](/#contact).
+[View my web development services](/hire-me) or [get in touch directly](/#contact). You can also learn more about [hiring a full-stack developer in Wollongong](/blog/fullstack-developer-wollongong-nsw) and what to look for.
