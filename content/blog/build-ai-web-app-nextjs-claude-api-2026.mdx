@@ -1,7 +1,7 @@
 ---
 title: "Building AI-Powered Web Apps with Next.js and the Claude API in 2026"
 date: "2026-03-20"
-description: "A practical guide to integrating Anthropic's Claude API into a Next.js 14 app — from streaming responses to building a real AI feature your users will love."
+description: "A practical guide to integrating Anthropic's Claude API into a Next.js 14 app, covering streaming responses, error handling, and building real AI features your users will love."
 keywords: ["Claude API Next.js", "build AI web app 2026", "Anthropic Claude API tutorial", "nextjs AI integration", "AI chatbot nextjs", "anthropic sdk react", "AI full stack developer australia"]
 readTime: "9 min read"
 category: "AI Development"
@@ -9,17 +9,19 @@ author: "Asif Hossain"
 coverImage: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&q=80"
 ---
 
-AI is no longer a nice-to-have feature — it's becoming the baseline expectation for modern web applications. If you're a Next.js developer in 2026, knowing how to wire up a language model API is as essential as knowing how to fetch from a REST endpoint.
+AI is no longer a nice-to-have feature. It is becoming the baseline expectation for modern web applications. If you are a Next.js developer in 2026, knowing how to wire up a language model API is as essential as knowing how to fetch from a REST endpoint.
 
-In this post I'll show you how to integrate Anthropic's Claude API into a Next.js 14 (App Router) project, using the official `@anthropic-ai/sdk` package — including streaming responses, proper error handling, and a clean UI pattern you can drop into a real product.
+In this post I will show you how to integrate Anthropic's Claude API into a Next.js 14 (App Router) project, using the official `@anthropic-ai/sdk` package, including streaming responses, proper error handling, and a clean UI pattern you can drop into a real product.
+
+If you are a business owner wondering what it costs to add AI features to your website, see my guide on [web development pricing in Australia](/blog/website-cost-australia-2026).
 
 ## Why Claude?
 
 Before we get into the code, a quick word on why I personally reach for Claude first.
 
-Claude produces long, coherent, accurate responses. It's particularly strong for tasks like summarisation, code generation, document Q&A, and writing — which maps to most of the AI features I'm asked to build for clients. The API is clean, the pricing is competitive, and Anthropic has a strong track record on safety and reliability.
+Claude produces long, coherent, accurate responses. It is particularly strong for tasks like summarisation, code generation, document Q&A, and writing, which maps to most of the AI features I am asked to build for clients. The API is clean, the pricing is competitive, and Anthropic has a strong track record on safety and reliability.
 
-That said, the pattern below works almost identically with OpenAI's API — the concepts transfer.
+That said, the pattern below works almost identically with OpenAI's API, so the concepts transfer.
 
 ## Project Setup
 
@@ -37,7 +39,7 @@ Add your API key to `.env.local`:
 ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-Never expose this key to the browser. We'll call the API from a **Route Handler** (server-side) only.
+Never expose this key to the browser. We will call the API from a **Route Handler** (server-side) only.
 
 ## Creating the API Route
 
@@ -84,7 +86,7 @@ export async function POST(req: NextRequest) {
 }
 ```
 
-This route streams tokens back to the browser as Claude generates them — exactly like you see in Claude.ai itself.
+This route streams tokens back to the browser as Claude generates them, exactly like you see in Claude.ai itself.
 
 ## Building the Chat UI
 
@@ -118,7 +120,6 @@ export default function ChatPage() {
     setMessages((prev) => [...prev, { role: "user", content: userMessage }])
     setLoading(true)
 
-    // Add empty assistant message to stream into
     setMessages((prev) => [...prev, { role: "assistant", content: "" }])
 
     try {
@@ -136,7 +137,6 @@ export default function ChatPage() {
         if (done) break
         const chunk = decoder.decode(value)
 
-        // Append chunk to the last message
         setMessages((prev) => {
           const updated = [...prev]
           updated[updated.length - 1] = {
@@ -197,7 +197,7 @@ export default function ChatPage() {
 
 ## Giving Claude a System Prompt
 
-For real products you almost always want a system prompt — it defines Claude's persona and scope. Update the route:
+For real products you almost always want a system prompt. It defines Claude's persona and scope. Update the route:
 
 ```typescript
 const stream = await client.messages.stream({
@@ -217,14 +217,13 @@ This is the key difference between a demo and a real product. A well-crafted sys
 The example above sends only the latest message. For real chat you need to send the full history:
 
 ```typescript
-// In your API route, accept a messages array instead
 const { messages } = await req.json()
 
 const stream = await client.messages.stream({
   model: "claude-opus-4-6",
   max_tokens: 1024,
   system: "You are a helpful assistant.",
-  messages, // Full conversation history
+  messages,
 })
 ```
 
@@ -234,25 +233,27 @@ On the client, pass `messages` from state (excluding any empty streaming message
 
 Before going live:
 
-- **Rate limiting** — add a simple IP-based rate limiter (e.g. `upstash/ratelimit`) on the route
-- **Input sanitisation** — cap message length server-side to prevent abuse
-- **Error boundaries** — wrap the chat component so a network error doesn't crash the whole page
-- **Model selection** — `claude-haiku-4-5-20251001` is significantly cheaper for high-volume consumer apps; use `claude-opus-4-6` for quality-critical tasks
-- **Cost monitoring** — set a usage alert in the Anthropic console on day one
+- **Rate limiting**: add a simple IP-based rate limiter (e.g. `upstash/ratelimit`) on the route
+- **Input sanitisation**: cap message length server-side to prevent abuse
+- **Error boundaries**: wrap the chat component so a network error does not crash the whole page
+- **Model selection**: `claude-haiku-4-5-20251001` is significantly cheaper for high-volume consumer apps; use `claude-opus-4-6` for quality-critical tasks
+- **Cost monitoring**: set a usage alert in the Anthropic console on day one
 
 ## What to Build Next
 
 Once you have a basic integration working, here are the features I add to most client projects:
 
-1. **Document Q&A** — accept file uploads, extract text, pass it as context in the system prompt
-2. **Structured output** — ask Claude to return JSON and parse it for form-filling, categorisation, or data extraction features
-3. **Function calling** — use tools to let Claude trigger actions in your app (search a database, send an email, etc.)
-4. **Semantic caching** — cache similar questions to cut API costs by up to 80%
+1. **Document Q&A**: accept file uploads, extract text, pass it as context in the system prompt
+2. **Structured output**: ask Claude to return JSON and parse it for form-filling, categorisation, or data extraction features
+3. **Function calling**: use tools to let Claude trigger actions in your app (search a database, send an email, etc.)
+4. **Semantic caching**: cache similar questions to cut API costs by up to 80%
+
+Want to see what AI tools I use day-to-day as a developer? Read [5 AI Tools Changing Full-Stack Development in 2026](/blog/ai-tools-fullstack-developers-2026).
 
 ## Final Thoughts
 
-The barrier to shipping AI features in 2026 is lower than ever. With Next.js App Router and the Anthropic SDK, you can go from zero to a streaming AI feature in under an hour. The hard part is the product thinking — deciding *what* to build, where it genuinely adds value, and how to make it feel natural.
+The barrier to shipping AI features in 2026 is lower than ever. With Next.js App Router and the Anthropic SDK, you can go from zero to a streaming AI feature in under an hour. The hard part is the product thinking: deciding what to build, where it genuinely adds value, and how to make it feel natural.
 
-If you're looking to add AI features to your web product or want a developer who can handle the full stack — front-end, API integration, and deployment — [get in touch](/#contact).
+If you are looking to add AI features to your web product or want a [full-stack developer](/hire-me) who can handle the entire stack, from front-end to API integration and deployment, [get in touch](/#contact).
 
 *Asif Hossain is a full-stack developer based in Wollongong, NSW, with hands-on experience building AI-powered web applications using the Claude API, OpenAI, and the Vercel AI SDK.*
