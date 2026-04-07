@@ -7,18 +7,19 @@ import { getAllPosts } from "@/lib/blog"
 import { shimmerDataURL } from "@/lib/shimmer"
 
 export const metadata: Metadata = {
-  title: "Dev Blog: Full-Stack Development Insights from Wollongong",
+  title: "Website Developer Blog | Web Development Tips & Guides | Wollongong NSW",
   description:
-    "Articles on React, Next.js, Node.js, AI development, freelancing in Australia, and web development case studies. Written by a full-stack developer based in Wollongong, NSW.",
+    "Practical guides on website costs, web development, AI tools, and tips for Australian businesses. Written by Asif Hossain, a website developer based in Wollongong, NSW.",
   keywords: [
-    "web development blog australia",
-    "react nextjs tutorials",
-    "fullstack developer blog wollongong",
+    "website developer blog australia",
+    "how much does a website cost australia",
+    "do I need a website for my business",
     "web development tips australia",
-    "nextjs developer blog",
-    "ai web development 2026",
-    "website cost australia 2026",
+    "website developer wollongong blog",
     "small business website australia",
+    "ai web development 2026",
+    "nextjs developer blog",
+    "website cost australia 2026",
   ],
   alternates: {
     canonical: "https://asifhossain.dev/blog",
@@ -26,9 +27,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://asifhossain.dev/blog",
-    title: "Dev Blog | Asif Hossain, Full-Stack Developer Wollongong",
+    title: "Website Developer Blog | Asif Hossain, Wollongong NSW",
     description:
-      "Articles on React, Next.js, AI development, and freelancing in Australia.",
+      "Guides on website costs, web development, and tips for Australian businesses. Written by a website developer in Wollongong.",
   },
 }
 

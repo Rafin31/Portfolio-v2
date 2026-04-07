@@ -29,25 +29,38 @@ export const metadata: Metadata = {
   // ── Core ──────────────────────────────────────────────────
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Asif Hossain | Full-Stack Developer | React, Next.js, Node.js",
-    template: "%s | Asif Hossain",
+    default: "Website Developer Wollongong | Asif Hossain | Web Developer NSW Australia",
+    template: "%s | Asif Hossain – Website Developer Wollongong",
   },
   description:
-    "Asif Hossain is a Full-Stack Developer based in Wollongong, Australia. Specialising in React.js, Next.js, Node.js, TypeScript and MongoDB. 50+ projects delivered with 100% client satisfaction.",
+    "Professional website developer in Wollongong, NSW. Asif Hossain builds websites and web apps for Australian businesses. React, Next.js, Node.js expert. 50+ projects delivered, 100% client satisfaction.",
   keywords: [
+    // Customer-facing (what people actually search)
+    "website developer wollongong",
+    "web developer wollongong",
+    "website developer australia",
+    "web developer australia",
+    "website design wollongong",
+    "website developer nsw",
+    "hire website developer wollongong",
+    "small business website developer australia",
+    "website developer near me wollongong",
+    "affordable website developer wollongong",
+    "professional web developer wollongong nsw",
+    "business website developer australia",
+    "website builder wollongong",
+    "web design wollongong",
+    "website developer illawarra",
+    // Technical / professional
     "Asif Hossain",
     "Full-Stack Developer Australia",
-    "React.js Developer Wollongong",
+    "React developer Wollongong",
     "Next.js Developer Australia",
     "Node.js Developer",
     "MERN Stack Developer",
-    "Software Engineer NSW",
     "Freelance Web Developer Australia",
     "TypeScript Developer",
-    "MongoDB Developer",
     "Web Developer Wollongong",
-    "Portfolio",
-    "Hire Full-Stack Developer",
   ],
   authors: [{ name: "Asif Hossain", url: BASE_URL }],
   creator: "Asif Hossain",
@@ -59,31 +72,31 @@ export const metadata: Metadata = {
     canonical: BASE_URL,
   },
 
-  // ── Open Graph (Facebook, LinkedIn previews) ──────────────
+  // ── Open Graph ────────────────────────────────────────────
   openGraph: {
     type: "website",
     url: BASE_URL,
-    title: "Asif Hossain | Full-Stack Developer | React, Next.js, Node.js",
+    title: "Website Developer Wollongong | Asif Hossain | Web Developer NSW",
     description:
-      "Full-Stack Developer based in Australia. Building scalable web applications with React.js, Next.js, Node.js and more. 50+ projects, 5-star rated.",
-    siteName: "Asif Hossain Portfolio",
+      "Professional website developer in Wollongong, NSW. Building websites and web apps for Australian businesses. 50+ projects, 5-star rated.",
+    siteName: "Asif Hossain – Website Developer Wollongong",
     images: [
       {
         url: "/profile.jpg",
         width: 400,
         height: 400,
-        alt: "Asif Hossain, Full-Stack Developer",
+        alt: "Asif Hossain, Website Developer Wollongong NSW",
       },
     ],
     locale: "en_AU",
   },
 
-  // ── Twitter / X card ──────────────────────────────────────
+  // ── Twitter / X ───────────────────────────────────────────
   twitter: {
     card: "summary_large_image",
-    title: "Asif Hossain | Full-Stack Developer",
+    title: "Website Developer Wollongong | Asif Hossain",
     description:
-      "Full-Stack Developer based in Australia. React.js, Next.js, Node.js. 50+ projects delivered.",
+      "Professional website developer based in Wollongong, NSW. Websites and web apps for Australian businesses.",
     images: ["/profile.jpg"],
     creator: "@Rafin31",
   },
@@ -108,21 +121,22 @@ export const metadata: Metadata = {
   },
 }
 
-// ── JSON-LD Structured Data (helps Google understand who you are) ──
-const jsonLd = {
+// ── JSON-LD: Person ────────────────────────────────────────────────────────
+const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Asif Hossain",
   url: BASE_URL,
   image: `${BASE_URL}/profile.jpg`,
-  jobTitle: "Full-Stack Developer",
+  jobTitle: "Website Developer",
   description:
-    "Full-Stack Developer specialising in React.js, Next.js, Node.js and cloud-based solutions. Based in Wollongong, Australia.",
+    "Professional website developer and web designer based in Wollongong, NSW, Australia. Building websites and web applications for Australian businesses.",
   email: "contact@asifhossain.dev",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Wollongong",
     addressRegion: "NSW",
+    postalCode: "2500",
     addressCountry: "AU",
   },
   sameAs: [
@@ -131,8 +145,9 @@ const jsonLd = {
     "https://www.fiverr.com/rafin_31",
   ],
   knowsAbout: [
-    "React.js", "Next.js", "Node.js", "TypeScript", "JavaScript",
-    "MongoDB", "PostgreSQL", "TailwindCSS", "AWS", "Docker",
+    "Website Development", "Web Design", "React.js", "Next.js",
+    "Node.js", "TypeScript", "JavaScript", "MongoDB", "PostgreSQL",
+    "TailwindCSS", "AWS", "E-Commerce Development",
   ],
   alumniOf: [
     {
@@ -147,6 +162,85 @@ const jsonLd = {
   ],
 }
 
+// ── JSON-LD: LocalBusiness (critical for "website developer wollongong") ──
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${BASE_URL}/#business`,
+  name: "Asif Hossain – Website Developer Wollongong",
+  url: BASE_URL,
+  image: `${BASE_URL}/profile.jpg`,
+  description:
+    "Professional website developer and web designer based in Wollongong, NSW. Building custom websites, e-commerce stores, and web applications for Australian businesses.",
+  telephone: "",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Wollongong",
+    addressLocality: "Wollongong",
+    addressRegion: "NSW",
+    postalCode: "2500",
+    addressCountry: "AU",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -34.4278,
+    longitude: 150.8931,
+  },
+  areaServed: [
+    { "@type": "City", "name": "Wollongong" },
+    { "@type": "City", "name": "Sydney" },
+    { "@type": "City", "name": "Melbourne" },
+    { "@type": "State", "name": "New South Wales" },
+    { "@type": "Country", "name": "Australia" },
+  ],
+  serviceType: [
+    "Website Development",
+    "Web Design",
+    "E-Commerce Development",
+    "Web Application Development",
+    "React Development",
+    "Next.js Development",
+  ],
+  priceRange: "$$",
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5",
+    reviewCount: "50",
+    bestRating: "5",
+    worstRating: "1",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Website Development Services",
+    itemListElement: [
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Business Website Development" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "E-Commerce Website Development" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Custom Web Application Development" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "React and Next.js Development" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Website Redesign and Modernisation" } },
+    ],
+  },
+}
+
+// ── JSON-LD: WebSite with SearchAction ────────────────────────────────────
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${BASE_URL}/#website`,
+  name: "Asif Hossain – Website Developer Wollongong",
+  url: BASE_URL,
+  description: "Portfolio and blog of Asif Hossain, professional website developer in Wollongong, NSW.",
+  inLanguage: "en-AU",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${BASE_URL}/blog?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -155,10 +249,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        {/* JSON-LD structured data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
       <body

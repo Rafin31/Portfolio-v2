@@ -6,32 +6,36 @@ import Footer from "@/components/Footer"
 const BASE_URL = "https://asifhossain.dev"
 
 export const metadata: Metadata = {
-  title: "Hire a Full-Stack Developer in Wollongong, Australia",
+  title: "Hire a Website Developer in Wollongong NSW | Web Development Services Australia",
   description:
-    "Hire Asif Hossain, a full-stack developer based in Wollongong, NSW. React, Next.js, Node.js, and cloud expertise. 50+ projects delivered with 100% client satisfaction.",
+    "Hire Asif Hossain, a professional website developer in Wollongong, NSW. Custom websites, e-commerce stores, and web apps for Australian businesses. 50+ projects, 100% satisfaction.",
   keywords: [
-    "hire fullstack developer wollongong",
-    "hire react developer australia",
-    "nextjs developer for hire australia",
-    "freelance web developer wollongong",
-    "hire node.js developer NSW",
-    "web development services australia",
+    "hire website developer wollongong",
+    "website developer for hire australia",
+    "web developer wollongong nsw",
+    "hire web developer australia",
+    "website design services wollongong",
+    "small business website developer wollongong",
+    "affordable website developer australia",
+    "freelance website developer wollongong",
+    "website development services nsw",
+    "ecommerce website developer australia",
     "react nextjs developer wollongong",
-    "full stack developer for hire australia",
+    "web development services australia",
   ],
   alternates: { canonical: `${BASE_URL}/hire-me` },
   openGraph: {
     type: "website",
     url: `${BASE_URL}/hire-me`,
-    title: "Hire a Full-Stack Developer in Wollongong, Australia | Asif Hossain",
+    title: "Hire a Website Developer in Wollongong, NSW | Asif Hossain",
     description:
-      "React, Next.js, Node.js expert. 50+ projects. Based in Wollongong, NSW. Available for Australian and global clients.",
-    images: [{ url: "/profile.jpg", width: 400, height: 400, alt: "Asif Hossain" }],
+      "Professional website developer in Wollongong, NSW. Custom websites and web apps for Australian businesses. 50+ projects delivered.",
+    images: [{ url: "/profile.jpg", width: 400, height: 400, alt: "Asif Hossain, Website Developer Wollongong" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hire Asif Hossain | Full-Stack Developer, Wollongong",
-    description: "React, Next.js, Node.js. 50+ projects. 100% satisfaction.",
+    title: "Website Developer Wollongong | Hire Asif Hossain",
+    description: "Professional website developer in Wollongong, NSW. 50+ projects, 100% satisfaction.",
     images: ["/profile.jpg"],
   },
 }
@@ -39,42 +43,112 @@ export const metadata: Metadata = {
 const serviceJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "Full-Stack Web Development by Asif Hossain",
+  "@id": `${BASE_URL}/hire-me#service`,
+  name: "Website Development Services – Asif Hossain, Wollongong NSW",
   url: `${BASE_URL}/hire-me`,
   image: `${BASE_URL}/profile.jpg`,
   description:
-    "Full-stack web development services specialising in React.js, Next.js, Node.js, and cloud infrastructure. Based in Wollongong, NSW.",
+    "Professional website developer in Wollongong, NSW. Custom websites, e-commerce stores, and web applications for Australian businesses.",
   provider: {
     "@type": "Person",
     name: "Asif Hossain",
     url: BASE_URL,
-    jobTitle: "Full-Stack Developer",
+    jobTitle: "Website Developer",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Wollongong",
       addressRegion: "NSW",
+      postalCode: "2500",
       addressCountry: "AU",
     },
   },
-  areaServed: ["Australia", "United States", "United Kingdom"],
-  serviceType: "Web Development",
+  areaServed: [
+    { "@type": "City", name: "Wollongong" },
+    { "@type": "State", name: "New South Wales" },
+    { "@type": "Country", name: "Australia" },
+  ],
+  serviceType: ["Website Development", "Web Design", "E-Commerce Development", "Web Application Development"],
+  priceRange: "$$",
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Web Development Services",
+    name: "Website Development Services",
     itemListElement: [
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Full-Stack Web Application Development" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "React & Next.js Frontend Development" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Node.js API & Backend Development" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "E-Commerce Development" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cloud Deployment & AWS Setup" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Business Website Design and Development" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "E-Commerce Website Development" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Custom Web Application Development" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "React and Next.js Development" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Website Redesign and Modernisation" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cloud Deployment and AWS Setup" } },
     ],
   },
 }
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Where are you based, and do you work with clients outside Wollongong?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "I'm based in Wollongong, NSW, Australia. I work with clients locally in the Illawarra region, across Australia (Sydney, Melbourne, Brisbane, etc.), and internationally. All project communication is handled online, with in-person meetings available for local clients.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How much does a website cost in Australia?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Website costs in Australia vary by scope. Simple landing pages start from $500–$1,500. Business websites with CMS from $1,500–$4,000. E-commerce stores from $4,000–$12,000. Custom web applications from $8,000+. I provide fixed-price quotes after a discovery call.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How long does it take to build a website?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "A simple website or landing page: 1–2 weeks. A business website with CMS: 2–4 weeks. A mid-complexity web application: 4–8 weeks. A complex, multi-feature system: 3–6 months.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do you build websites for small businesses in Wollongong?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. I specialise in building professional websites for small and medium businesses in Wollongong, the Illawarra region, and across NSW and Australia. I handle everything from design to launch.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What technologies do you use to build websites?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "I use Next.js and React for frontend development, Node.js for backend, MongoDB and PostgreSQL for databases, and AWS or Vercel for hosting. This stack produces fast, SEO-friendly, scalable websites.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do you offer ongoing website support after launch?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. I offer post-launch support for bug fixes, content updates, and feature additions. Ongoing maintenance retainers are available for businesses that want regular support.",
+      },
+    },
+  ],
+}
+
 const SERVICES = [
   {
+    icon: "🌐",
+    title: "Business Website Development",
+    description:
+      "Professional websites for small and medium businesses in Wollongong and across Australia. Fast, mobile-friendly, SEO-optimised, and ready to attract customers.",
+    tech: ["Next.js", "TailwindCSS", "CMS", "SEO", "Google Analytics"],
+  },
+  {
     icon: "🖥️",
-    title: "Full-Stack Web Applications",
+    title: "Custom Web Applications",
     description:
       "Custom web apps built end-to-end, from database schema to pixel-perfect UI. Ideal for SaaS products, internal tools, and business systems.",
     tech: ["React.js", "Next.js", "Node.js", "MongoDB", "PostgreSQL"],
@@ -188,6 +262,10 @@ export default function HireMePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <Navbar />
       <main className="min-h-screen bg-background pt-24 pb-20">
 
@@ -197,13 +275,14 @@ export default function HireMePage() {
             Available for Projects
           </span>
           <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-text-primary leading-tight mb-6">
-            Hire a Full-Stack Developer{" "}
-            <span className="gradient-text">in Wollongong, Australia</span>
+            Website Developer{" "}
+            <span className="gradient-text">in Wollongong, NSW</span>
           </h1>
           <p className="text-text-muted text-lg sm:text-xl max-w-2xl mx-auto mb-10">
-            React, Next.js &amp; Node.js expert with 3+ years of experience and
-            50+ projects delivered. Based in Wollongong, NSW, available for
-            local and remote projects across Australia and globally.
+            Professional website developer and web designer based in Wollongong,
+            NSW. I build fast, modern websites and web applications for
+            Australian businesses. 50+ projects delivered, 100% client
+            satisfaction.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
