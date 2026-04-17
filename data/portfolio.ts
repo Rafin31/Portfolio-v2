@@ -302,6 +302,36 @@ export const projects: Project[] = [
     gradient: "from-yellow-500 via-amber-600 to-orange-700",
     imagekitFolder:"Inventory-Management-System"
   },
+  {
+    id: 9,
+    slug: "tourhill-europe-tour-booking-platform",
+    title: "TourHill — Europe Tour & Travel Booking Platform",
+    description: "Production travel booking platform for curated skip-the-line tickets and expert guided tours across Spain. Built with Next.js 15 and live at tourhill.com.",
+    longDescription:
+      "TourHill is a live, production-grade travel booking web application helping tourists discover and book skip-the-line tickets and expert guided tours across Spain's top destinations, starting with Barcelona. Built with Next.js 15 App Router, strict TypeScript, Zustand for state management, TanStack Query for server-state, Zod for form validation, and Framer Motion for animations. Supports multi-language (i18n) for international reach and is fully optimised for Core Web Vitals, SEO, and conversion.",
+    category: ["fullstack", "freelance"],
+    tech: ["Next.js 15", "TypeScript", "Tailwind CSS", "Zustand", "TanStack Query", "Zod", "React Hook Form", "Framer Motion", "i18n"],
+    github: "https://github.com/Rafin31/Europe-Tour-Attraction",
+    demo: "https://www.tourhill.com/",
+    gradient: "from-sky-400 via-cyan-500 to-blue-600",
+    highlight: "Live production platform",
+    imagekitFolder: "europe-tour-attraction",
+  },
+  {
+    id: 10,
+    slug: "quickfinance-tools-personal-finance-calculators",
+    title: "QuickFinance Tools — Personal Finance Calculators",
+    description: "Free personal finance calculator suite for freelancers, gig workers, and retirement planners. Clear numbers, zero jargon.",
+    longDescription:
+      "QuickFinance Tools is a free web-based finance calculator suite built for real-life financial decisions. Whether you freelance, drive for rideshare, or want to plan your retirement, it gives you clear and honest numbers without the financial jargon. Built with Next.js 14 App Router, TypeScript, and Tailwind CSS. Monetised with Google AdSense and SEO-optimised for US and European search traffic.",
+    category: ["fullstack", "frontend"],
+    tech: ["Next.js 14", "TypeScript", "Tailwind CSS", "Vercel Analytics", "Google AdSense"],
+    github: "https://github.com/Rafin31/quickfinance-tools",
+    demo: "https://quickfinance-tools.vercel.app",
+    gradient: "from-green-400 via-emerald-500 to-teal-600",
+    highlight: "Finance tools for real life",
+    imagekitFolder: "quickfinance-tools",
+  },
 ]
 
 export const projectCategories: { id: ProjectCategory; label: string }[] = [
