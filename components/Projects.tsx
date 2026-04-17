@@ -115,14 +115,19 @@ const FLOAT_VARIANTS = [
 ]
 
 function ProjectCard({ project }: { project: (typeof projects)[0] }) {
-  const [hovered,   setHovered]   = useState(false)
-  const [imgLoaded, setImgLoaded] = useState(false)
-  const [imgError,  setImgError]  = useState(false)
+  const [hovered,     setHovered]     = useState(false)
+  const [imgLoaded,   setImgLoaded]   = useState(false)
+  const [imgError,    setImgError]    = useState(false)
+  const [navigating,  setNavigating]  = useState(false)
   const router = useRouter()
   const num = String(project.id).padStart(2, "0")
 
-  // Show up to 4 floating tech tags (corner positions)
   const floatingTags = project.tech.slice(0, 4)
+
+  function handleClick() {
+    setNavigating(true)
+    router.push(`/projects/${project.slug}`)
+  }
 
   return (
     <motion.article
@@ -138,14 +143,24 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={() => router.push(`/projects/${project.slug}`)}
+      onClick={handleClick}
       whileHover={{ y: -4 }}
+      whileTap={{ scale: 0.97 }}
       className={`group relative bg-card border rounded-2xl overflow-hidden flex flex-col transition-colors duration-300 cursor-pointer ${
         hovered
           ? "border-accent-yellow/50 shadow-2xl shadow-accent-yellow/10"
           : "border-border"
       }`}
     >
+      {/* Navigation loading overlay */}
+      {navigating && (
+        <div className="absolute inset-0 z-50 bg-background/70 backdrop-blur-sm flex items-center justify-center rounded-2xl">
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-8 h-8 rounded-full border-2 border-accent-yellow/30 border-t-accent-yellow animate-spin" />
+            <span className="text-xs text-accent-yellow font-mono">Loading...</span>
+          </div>
+        </div>
+      )}
       {/* ── Browser chrome ─────────────────────────────────── */}
       <div className="flex items-center gap-2 px-4 py-3 bg-surface border-b border-border flex-shrink-0">
         <span className="w-3 h-3 rounded-full bg-red-500/80" />
