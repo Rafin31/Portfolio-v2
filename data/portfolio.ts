@@ -175,6 +175,8 @@ export interface Project {
   demo: string
   gradient: string // Tailwind gradient classes for fallback / detail hero
   highlight?: string // Featured text
+  featured?: boolean // Show "Featured" badge on the card
+  ongoing?: boolean // Show pulsing "Ongoing" badge — project is actively in development
   imagekitFolder?: string // Subfolder name in ImageKit "Portfolio Projects Images"
   imagekitSnapshots?: number // How many snapshot images exist (snapshot1 … snapshotN)
 }
@@ -315,6 +317,8 @@ export const projects: Project[] = [
     demo: "https://www.tourhill.com/",
     gradient: "from-sky-400 via-cyan-500 to-blue-600",
     highlight: "Live production platform",
+    featured: true,
+    ongoing: true,
     imagekitFolder: "europe-tour-attraction",
   },
   {

@@ -246,6 +246,25 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
           {num}
         </div>
 
+        {/* Featured badge — top-left */}
+        {project.featured && (
+          <div className="absolute top-2.5 left-2.5 z-20 flex items-center gap-1 bg-accent-yellow/90 backdrop-blur-sm rounded-full px-2.5 py-1 text-[10px] font-bold text-background">
+            <HiSparkles className="w-3 h-3" />
+            Featured
+          </div>
+        )}
+
+        {/* Ongoing badge — top-right */}
+        {project.ongoing && (
+          <div className="absolute top-2.5 right-2.5 z-20 flex items-center gap-1.5 bg-black/50 backdrop-blur-sm border border-green-400/40 rounded-full px-2.5 py-1 text-[10px] font-medium text-green-400">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
+            </span>
+            Ongoing
+          </div>
+        )}
+
         {/* Center: title + highlight — always wrapped in a dark pill for readability */}
         <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center z-10">
           <div className="bg-black/55 backdrop-blur-sm rounded-xl px-3 py-2 max-w-[190px]">
