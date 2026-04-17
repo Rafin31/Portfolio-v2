@@ -43,7 +43,7 @@ export default function Navbar() {
       if (!el) return
       const obs = new IntersectionObserver(
         ([entry]) => { if (entry.isIntersecting) setActiveSection(id) },
-        { threshold: 0.4 }
+        { threshold: 0, rootMargin: "-40% 0px -55% 0px" }
       )
       obs.observe(el)
       observers.push(obs)
