@@ -241,7 +241,7 @@ export const projects: Project[] = [
     demo: "https://github.com/Rafin31/React-firebase-app",
     gradient: "from-rose-500 via-pink-600 to-fuchsia-700",
     highlight: "+40% online orders",
-    imagekitFolder:"Game-Coach-Platform"
+    imagekitFolder: "Game-Coach-Platform"
   },
   {
     id: 5,
@@ -302,7 +302,7 @@ export const projects: Project[] = [
     github: "#",
     demo: "https://github.com/Rafin31/Inventory-Management-System",
     gradient: "from-yellow-500 via-amber-600 to-orange-700",
-    imagekitFolder:"Inventory-Management-System"
+    imagekitFolder: "Inventory-Management-System"
   },
   {
     id: 9,
@@ -312,7 +312,7 @@ export const projects: Project[] = [
     longDescription:
       "TourHill is a live, production-grade travel booking web application helping tourists discover and book skip-the-line tickets and expert guided tours across Spain's top destinations, starting with Barcelona. Built with Next.js 15 App Router, strict TypeScript, Zustand for state management, TanStack Query for server-state, Zod for form validation, and Framer Motion for animations. Supports multi-language (i18n) for international reach and is fully optimised for Core Web Vitals, SEO, and conversion.",
     category: ["fullstack", "freelance"],
-    tech: ["Next.js 15", "TypeScript", "Tailwind CSS", "Zustand", "TanStack Query", "Zod", "React Hook Form", "Framer Motion", "i18n"],
+    tech: ["Next.js 15", "TypeScript", "Tailwind CSS", "Redux", "TanStack Query", "Zod", "React Hook Form", "Framer Motion", "i18n"],
     github: "https://github.com/Rafin31/Europe-Tour-Attraction",
     demo: "https://www.tourhill.com/",
     gradient: "from-sky-400 via-cyan-500 to-blue-600",
@@ -331,7 +331,7 @@ export const projects: Project[] = [
     category: ["fullstack", "frontend"],
     tech: ["Next.js 14", "TypeScript", "Tailwind CSS", "Vercel Analytics", "Google AdSense"],
     github: "https://github.com/Rafin31/quickfinance-tools",
-    demo: "https://quickfinance-tools.vercel.app",
+    demo: "https://quickfinance.tools",
     gradient: "from-green-400 via-emerald-500 to-teal-600",
     highlight: "Finance tools for real life",
     imagekitFolder: "quickfinance-tools",
@@ -472,7 +472,7 @@ export const testimonials: Testimonial[] = [
     initials: "CA",
     avatarGradient: "from-cyan-400 to-sky-600",
   },
-   {
+  {
     id: 12,
     quote:
       "One of the best sellers in fiverr, he has amazing communication and very hardworking seller. would 100% recommend him",
@@ -494,10 +494,10 @@ export const testimonials: Testimonial[] = [
     initials: "SE",
     avatarGradient: "from-cyan-400 to-sky-600",
   },
-    {
+  {
     id: 14,
     quote:
-    "Asif is just so brilliant and a great teacher, his explanations are so good and easily understandable!",
+      "Asif is just so brilliant and a great teacher, his explanations are so good and easily understandable!",
     name: "aniqtanwir589",
     role: "Product Manager",
     company: "Wilson Digital",
