@@ -9,6 +9,7 @@ const HIGH_PRIORITY_SLUGS = new Set([
   "website-cost-australia-2026",
   "do-i-need-a-website-for-my-small-business",
   "fullstack-developer-wollongong-nsw",
+  "typescript-vs-javascript-2026",
 ])
 
 export default function sitemap(): MetadataRoute.Sitemap {
