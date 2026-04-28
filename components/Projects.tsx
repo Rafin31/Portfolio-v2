@@ -275,10 +275,10 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
 
           {/* Links */}
           <div className="flex items-center gap-4 pt-1 border-t border-border">
-            <a href={project.github} onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5 text-text-muted text-sm hover:text-accent-yellow transition-colors font-medium">
+            <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5 text-text-muted text-sm hover:text-accent-yellow transition-colors font-medium">
               <FiGithub className="w-4 h-4" /> Source
             </a>
-            <a href={project.demo} onClick={(e) => e.stopPropagation()} className="flex items-center gap-2 px-4 py-2 bg-accent-yellow text-background rounded-xl text-sm font-semibold hover:bg-amber-400 transition-colors">
+            <a href={project.demo} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="flex items-center gap-2 px-4 py-2 bg-accent-yellow text-background rounded-xl text-sm font-semibold hover:bg-amber-400 transition-colors">
               <FiExternalLink className="w-3.5 h-3.5" /> Live Demo
             </a>
             <span className="ml-auto flex items-center gap-1 text-accent-yellow text-sm font-semibold">
@@ -362,10 +362,10 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
           )}
         </div>
         <motion.div animate={{ opacity: hovered ? 1 : 0 }} transition={{ duration: 0.2 }} className="absolute inset-0 bg-black/65 backdrop-blur-[3px] flex items-center justify-center gap-3 z-20">
-          <a href={project.github} onClick={(e) => e.stopPropagation()} className="flex items-center gap-2 px-4 py-2.5 bg-white/10 border border-white/20 rounded-xl text-white text-sm font-medium hover:bg-white/20 transition-colors">
+          <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="flex items-center gap-2 px-4 py-2.5 bg-white/10 border border-white/20 rounded-xl text-white text-sm font-medium hover:bg-white/20 transition-colors">
             <FiGithub className="w-4 h-4" /> GitHub
           </a>
-          <a href={project.demo} onClick={(e) => e.stopPropagation()} className="flex items-center gap-2 px-4 py-2.5 bg-accent-yellow text-background rounded-xl text-sm font-semibold hover:bg-amber-400 transition-colors">
+          <a href={project.demo} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="flex items-center gap-2 px-4 py-2.5 bg-accent-yellow text-background rounded-xl text-sm font-semibold hover:bg-amber-400 transition-colors">
             <FiExternalLink className="w-4 h-4" /> Live Demo
           </a>
         </motion.div>
@@ -390,10 +390,10 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
         </div>
         <div className="flex items-center justify-between pt-3 mt-auto border-t border-border">
           <div className="flex items-center gap-3">
-            <a href={project.github} onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5 text-text-muted text-xs hover:text-accent-yellow transition-colors font-medium">
+            <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5 text-text-muted text-xs hover:text-accent-yellow transition-colors font-medium">
               <FiGithub className="w-3.5 h-3.5" /> Source
             </a>
-            <a href={project.demo} onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5 text-text-muted text-xs hover:text-accent-cyan transition-colors font-medium">
+            <a href={project.demo} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5 text-text-muted text-xs hover:text-accent-cyan transition-colors font-medium">
               <FiExternalLink className="w-3.5 h-3.5" /> Demo
             </a>
           </div>
