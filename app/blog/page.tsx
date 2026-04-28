@@ -1,8 +1,11 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
+import { Suspense } from "react"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import BlogFilters from "@/components/BlogFilters"
+import BlogPagination from "@/components/BlogPagination"
 import { getAllPosts } from "@/lib/blog"
 import { shimmerDataURL } from "@/lib/shimmer"
 
@@ -33,6 +36,8 @@ export const metadata: Metadata = {
   },
 }
 
+const POSTS_PER_PAGE = 6
+
 const CATEGORY_COLORS: Record<string, string> = {
   "Local Tech": "bg-amber-500/15 text-amber-400 border-amber-500/30",
   "Case Study": "bg-cyan-500/15 text-cyan-400 border-cyan-500/30",
@@ -48,15 +53,39 @@ function formatDate(dateStr: string): string {
   })
 }
 
-export default function BlogPage() {
-  const posts = getAllPosts()
+interface Props {
+  searchParams: Promise<{ category?: string; page?: string }>
+}
+
+export default async function BlogPage({ searchParams }: Props) {
+  const { category, page } = await searchParams
+
+  const allPosts = getAllPosts()
+
+  const categories = Array.from(new Set(allPosts.map((p) => p.category)))
+
+  const activeCategory = category && categories.includes(category) ? category : "All"
+
+  const filtered =
+    activeCategory === "All"
+      ? allPosts
+      : allPosts.filter((p) => p.category === activeCategory)
+
+  const currentPage = Math.max(1, parseInt(page ?? "1", 10))
+  const totalPages = Math.ceil(filtered.length / POSTS_PER_PAGE)
+  const safePage = Math.min(currentPage, Math.max(1, totalPages))
+
+  const posts = filtered.slice(
+    (safePage - 1) * POSTS_PER_PAGE,
+    safePage * POSTS_PER_PAGE
+  )
 
   return (
     <>
       <Navbar />
       <main className="min-h-screen bg-background pt-24 pb-20">
         {/* ── Header ─────────────────────────────────────────── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
           <div className="text-center">
             <span className="inline-block px-4 py-1.5 rounded-full bg-accent-yellow/10 border border-accent-yellow/20 text-accent-yellow text-sm font-medium mb-4">
               Dev Blog
@@ -73,84 +102,97 @@ export default function BlogPage() {
           </div>
         </section>
 
+        {/* ── Filters ────────────────────────────────────────── */}
+        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+          <Suspense fallback={null}>
+            <BlogFilters categories={categories} activeCategory={activeCategory} />
+          </Suspense>
+        </section>
+
         {/* ── Posts grid ─────────────────────────────────────── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {posts.length === 0 ? (
             <p className="text-text-muted text-center py-20">
-              No posts yet. Check back soon.
+              No posts in this category yet.
             </p>
           ) : (
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post) => {
-                const colorClass =
-                  CATEGORY_COLORS[post.category] ??
-                  "bg-slate-500/15 text-slate-400 border-slate-500/30"
-                return (
-                  <Link
-                    key={post.slug}
-                    href={`/blog/${post.slug}`}
-                    className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-accent-yellow/40 hover:shadow-xl hover:shadow-accent-yellow/5 hover:-translate-y-1"
-                  >
-                    {/* Cover image */}
-                    {post.coverImage ? (
-                      <div className="relative h-48 overflow-hidden bg-surface flex-shrink-0">
-                        <Image
-                          src={post.coverImage}
-                          alt={post.title}
-                          fill
-                          loading="lazy"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
-                          placeholder="blur"
-                          blurDataURL={shimmerDataURL(360, 192)}
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent" />
+            <>
+              <p className="text-text-muted text-sm mb-6">
+                {filtered.length} {filtered.length === 1 ? "post" : "posts"}
+                {activeCategory !== "All" && ` in ${activeCategory}`}
+              </p>
+
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {posts.map((post) => {
+                  const colorClass =
+                    CATEGORY_COLORS[post.category] ??
+                    "bg-slate-500/15 text-slate-400 border-slate-500/30"
+                  return (
+                    <Link
+                      key={post.slug}
+                      href={`/blog/${post.slug}`}
+                      className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-accent-yellow/40 hover:shadow-xl hover:shadow-accent-yellow/5 hover:-translate-y-1"
+                    >
+                      {post.coverImage ? (
+                        <div className="relative h-48 overflow-hidden bg-surface flex-shrink-0">
+                          <Image
+                            src={post.coverImage}
+                            alt={post.title}
+                            fill
+                            loading="lazy"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
+                            placeholder="blur"
+                            blurDataURL={shimmerDataURL(360, 192)}
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent" />
+                        </div>
+                      ) : (
+                        <div className="h-1 w-full bg-gradient-to-r from-accent-yellow to-accent-cyan flex-shrink-0" />
+                      )}
+
+                      <div className="flex flex-col flex-1 p-6 gap-4">
+                        <div className="flex items-center justify-between gap-2">
+                          <span
+                            className={`inline-block px-3 py-1 rounded-full text-xs font-medium border ${colorClass}`}
+                          >
+                            {post.category}
+                          </span>
+                          <span className="text-text-muted text-xs">
+                            {post.readTime}
+                          </span>
+                        </div>
+
+                        <h2 className="font-heading text-lg font-semibold text-text-primary leading-snug group-hover:text-accent-yellow transition-colors duration-200">
+                          {post.title}
+                        </h2>
+
+                        <p className="text-text-muted text-sm leading-relaxed flex-1">
+                          {post.description}
+                        </p>
+
+                        <div className="flex items-center justify-between pt-2 border-t border-border mt-auto">
+                          <time
+                            dateTime={post.date}
+                            className="text-text-muted text-xs"
+                          >
+                            {formatDate(post.date)}
+                          </time>
+                          <span className="text-accent-yellow text-sm font-medium group-hover:underline">
+                            Read →
+                          </span>
+                        </div>
                       </div>
-                    ) : (
-                      /* Top accent bar when no image */
-                      <div className="h-1 w-full bg-gradient-to-r from-accent-yellow to-accent-cyan flex-shrink-0" />
-                    )}
+                    </Link>
+                  )
+                })}
+              </div>
 
-                    <div className="flex flex-col flex-1 p-6 gap-4">
-                      {/* Category + read time */}
-                      <div className="flex items-center justify-between gap-2">
-                        <span
-                          className={`inline-block px-3 py-1 rounded-full text-xs font-medium border ${colorClass}`}
-                        >
-                          {post.category}
-                        </span>
-                        <span className="text-text-muted text-xs">
-                          {post.readTime}
-                        </span>
-                      </div>
-
-                      {/* Title — changes colour on hover via parent group */}
-                      <h2 className="font-heading text-lg font-semibold text-text-primary leading-snug group-hover:text-accent-yellow transition-colors duration-200">
-                        {post.title}
-                      </h2>
-
-                      {/* Description */}
-                      <p className="text-text-muted text-sm leading-relaxed flex-1">
-                        {post.description}
-                      </p>
-
-                      {/* Footer */}
-                      <div className="flex items-center justify-between pt-2 border-t border-border mt-auto">
-                        <time
-                          dateTime={post.date}
-                          className="text-text-muted text-xs"
-                        >
-                          {formatDate(post.date)}
-                        </time>
-                        <span className="text-accent-yellow text-sm font-medium group-hover:underline">
-                          Read →
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                )
-              })}
-            </div>
+              {/* Pagination */}
+              <Suspense fallback={null}>
+                <BlogPagination currentPage={safePage} totalPages={totalPages} />
+              </Suspense>
+            </>
           )}
         </section>
 
