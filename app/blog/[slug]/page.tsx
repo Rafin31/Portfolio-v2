@@ -6,6 +6,7 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import remarkGfm from "remark-gfm"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import BlogSidebar from "@/components/BlogSidebar"
 import { getPostBySlug, getAllSlugs } from "@/lib/blog"
 import { shimmerDataURL } from "@/lib/shimmer"
 
@@ -91,94 +92,117 @@ export default function BlogPostPage({ params }: Props) {
       />
       <Navbar />
       <main className="min-h-screen bg-background pt-24 pb-20">
-        <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Back link */}
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-text-muted hover:text-accent-yellow transition-colors text-sm mb-10"
-          >
-            ← Back to Blog
-          </Link>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-12 items-start">
 
-          {/* Header */}
-          <header className="mb-10">
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-accent-yellow/10 border border-accent-yellow/20 text-accent-yellow text-xs font-medium">
-                {post.category}
-              </span>
-              <span className="text-text-muted text-xs">{post.readTime}</span>
-            </div>
+            {/* Main article */}
+            <article>
+              {/* Back link */}
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 text-text-muted hover:text-accent-yellow transition-colors text-sm mb-10"
+              >
+                ← Back to Blog
+              </Link>
 
-            <h1 className="font-heading text-3xl sm:text-4xl font-bold text-text-primary leading-tight mb-4">
-              {post.title}
-            </h1>
+              {/* Header */}
+              <header className="mb-10">
+                <div className="flex flex-wrap items-center gap-3 mb-4">
+                  <span className="px-3 py-1 rounded-full bg-accent-yellow/10 border border-accent-yellow/20 text-accent-yellow text-xs font-medium">
+                    {post.category}
+                  </span>
+                  <span className="text-text-muted text-xs">{post.readTime}</span>
+                </div>
 
-            <p className="text-text-muted text-lg leading-relaxed mb-6">
-              {post.description}
-            </p>
+                <h1 className="font-heading text-3xl sm:text-4xl font-bold text-text-primary leading-tight mb-4">
+                  {post.title}
+                </h1>
 
-            <div className="flex items-center gap-4 text-sm text-text-muted">
-              <span>By {post.author}</span>
-              <span>·</span>
-              <time dateTime={post.date}>{formatDate(post.date)}</time>
-            </div>
+                <p className="text-text-muted text-lg leading-relaxed mb-6">
+                  {post.description}
+                </p>
 
-            {/* Cover image */}
-            {post.coverImage && (
-              <div className="relative mt-8 rounded-2xl overflow-hidden aspect-[16/7]">
-                <Image
-                  src={post.coverImage}
-                  alt={post.title}
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 768px"
-                  placeholder="blur"
-                  blurDataURL={shimmerDataURL(768, 336)}
-                  className="object-cover"
+                <div className="flex items-center gap-4 text-sm text-text-muted">
+                  <span>By {post.author}</span>
+                  <span>·</span>
+                  <time dateTime={post.date}>{formatDate(post.date)}</time>
+                </div>
+
+                {/* Cover image */}
+                {post.coverImage && (
+                  <div className="relative mt-8 rounded-2xl overflow-hidden aspect-[16/7]">
+                    <Image
+                      src={post.coverImage}
+                      alt={post.title}
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 100vw, 768px"
+                      placeholder="blur"
+                      blurDataURL={shimmerDataURL(768, 336)}
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+              </header>
+
+              {/* Divider */}
+              <div className="h-px bg-gradient-to-r from-accent-yellow/40 via-accent-cyan/40 to-transparent mb-10" />
+
+              {/* MDX Content */}
+              <div className="mdx-content">
+                <MDXRemote
+                  source={post.content}
+                  options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
                 />
               </div>
-            )}
-          </header>
 
-          {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-accent-yellow/40 via-accent-cyan/40 to-transparent mb-10" />
+              {/* Divider */}
+              <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent my-12" />
 
-          {/* MDX Content */}
-          <div className="mdx-content">
-            <MDXRemote
-              source={post.content}
-              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
-            />
-          </div>
+              {/* Mobile sidebar — visible only below lg, sits between content and CTA */}
+              <div className="lg:hidden mb-12">
+                <BlogSidebar
+                  currentSlug={post.slug}
+                  currentCategory={post.category}
+                />
+              </div>
 
-          {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent my-12" />
+              {/* CTA */}
+              <div className="bg-card border border-border rounded-2xl p-8 text-center">
+                <h2 className="font-heading text-xl font-bold text-text-primary mb-2">
+                  Need a Full-Stack Developer?
+                </h2>
+                <p className="text-text-muted mb-6">
+                  Based in Wollongong, NSW. Available for projects across Australia
+                  and globally.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <Link
+                    href="/hire-me"
+                    className="px-6 py-3 bg-accent-yellow text-background font-semibold rounded-xl hover:bg-amber-400 transition-colors glow-yellow-sm"
+                  >
+                    View Services
+                  </Link>
+                  <Link
+                    href="/#contact"
+                    className="px-6 py-3 bg-surface border border-border text-text-primary font-semibold rounded-xl hover:border-accent-cyan/50 transition-colors"
+                  >
+                    Get in Touch
+                  </Link>
+                </div>
+              </div>
+            </article>
 
-          {/* CTA */}
-          <div className="bg-card border border-border rounded-2xl p-8 text-center">
-            <h2 className="font-heading text-xl font-bold text-text-primary mb-2">
-              Need a Full-Stack Developer?
-            </h2>
-            <p className="text-text-muted mb-6">
-              Based in Wollongong, NSW. Available for projects across Australia
-              and globally.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/hire-me"
-                className="px-6 py-3 bg-accent-yellow text-background font-semibold rounded-xl hover:bg-amber-400 transition-colors glow-yellow-sm"
-              >
-                View Services
-              </Link>
-              <Link
-                href="/#contact"
-                className="px-6 py-3 bg-surface border border-border text-text-primary font-semibold rounded-xl hover:border-accent-cyan/50 transition-colors"
-              >
-                Get in Touch
-              </Link>
+            {/* Sidebar — sticky on desktop only (mobile version is inline above) */}
+            <div className="hidden lg:block sticky top-24 self-start">
+              <BlogSidebar
+                currentSlug={post.slug}
+                currentCategory={post.category}
+              />
             </div>
+
           </div>
-        </article>
+        </div>
       </main>
       <Footer />
     </>
