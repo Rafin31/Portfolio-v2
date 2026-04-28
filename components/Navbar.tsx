@@ -55,9 +55,11 @@ export default function Navbar() {
     setMobileOpen(false)
     if (isHome) {
       const id = href.replace("#", "")
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+      // Wait for mobile menu close animation (300ms) before scrolling
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+      }, 300)
     } else {
-      // Navigate to home page and anchor
       window.location.href = `/${href}`
     }
   }

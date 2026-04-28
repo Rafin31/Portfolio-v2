@@ -11,12 +11,16 @@ import { shimmerDataURL } from "@/lib/shimmer"
 import { FiGithub, FiExternalLink } from "react-icons/fi"
 import { HiSparkles, HiArrowUpRight } from "react-icons/hi2"
 
+const LOAD_STEP = 3
+const INITIAL_EXTRA = 3
+
 export default function Projects() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-80px" })
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all")
+  const [visibleExtra, setVisibleExtra] = useState(INITIAL_EXTRA)
 
-  const filtered = (
+  const sorted = (
     activeFilter === "all"
       ? projects
       : projects.filter((p) => p.category.includes(activeFilter))
@@ -25,6 +29,17 @@ export default function Projects() {
     if (!a.featured && b.featured) return 1
     return b.id - a.id
   })
+
+  const pinned = sorted.filter((p) => p.featured || p.ongoing)
+  const rest   = sorted.filter((p) => !p.featured && !p.ongoing)
+
+  const visible    = [...pinned, ...rest.slice(0, visibleExtra)]
+  const hasMore    = rest.length > visibleExtra
+
+  function handleFilterChange(cat: ProjectCategory) {
+    setActiveFilter(cat)
+    setVisibleExtra(INITIAL_EXTRA)
+  }
 
   return (
     <section id="projects" className="py-24 bg-background relative overflow-hidden">
@@ -61,7 +76,7 @@ export default function Projects() {
           {projectCategories.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => setActiveFilter(cat.id)}
+              onClick={() => handleFilterChange(cat.id)}
               className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeFilter === cat.id
                   ? "text-background font-semibold"
@@ -93,12 +108,28 @@ export default function Projects() {
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             <AnimatePresence mode="sync">
-              {filtered.map((project) => (
+              {visible.map((project) => (
                 <ProjectCard key={project.id} project={project} />
               ))}
             </AnimatePresence>
           </motion.div>
         </LayoutGroup>
+
+        {/* Load more */}
+        {hasMore && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex justify-center mt-12"
+          >
+            <button
+              onClick={() => setVisibleExtra((v) => v + LOAD_STEP)}
+              className="px-8 py-3 rounded-full border border-accent-yellow/40 text-accent-yellow text-sm font-semibold hover:bg-accent-yellow hover:text-background transition-all duration-300"
+            >
+              Load more ({rest.length - visibleExtra} remaining)
+            </button>
+          </motion.div>
+        )}
       </div>
     </section>
   )
