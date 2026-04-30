@@ -384,6 +384,82 @@ export const projectDetails: Record<string, ProjectDetail> = {
       "Fully functional inventory system replacing manual spreadsheet workflows. Accurate real-time profit tracking with no data inconsistencies reported after deployment.",
   },
 
+  "tourhill-europe-tour-booking-platform": {
+    slug: "tourhill-europe-tour-booking-platform",
+    coverImage:
+      "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=1400&q=80&auto=format&fit=crop",
+    imageAlt: "Barcelona skyline with Sagrada Familia — TourHill travel booking platform",
+    imageCredit: "Photo by Mikael Kristenson on Unsplash",
+    overview:
+      "TourHill is a live, production-grade travel booking platform at tourhill.com — helping tourists discover and book skip-the-line tickets and expert guided tours across Spain's top destinations, starting with Barcelona. I designed and built the entire system from scratch: a Next.js 15 App Router frontend with strict TypeScript, and a Node.js/Express REST API backed by PostgreSQL and Redis, deployed to a Namecheap VPS with Nginx and PM2. The platform handles real-time availability calendars, multi-currency pricing across 10 currencies, a dual-auth system (JWT + httpOnly cookie), Stripe payment webhooks, an admin panel for schedule management, a favorites system with guest-to-server sync, a blog CMS, and multi-language support (i18n) for international reach. Every booking passes backend price verification, atomic Redis slot decrements via Lua script, and guest-count validation to prevent both overselling and price tampering.",
+    features: [
+      {
+        icon: "📅",
+        title: "Real-Time Availability Calendar",
+        description:
+          "Monthly availability is fetched in a single bundled API call for all ticket options. Redis stores per-slot spot counts (spotsLeft). An atomic Lua script decrements the count on booking — if the slot hits zero mid-transaction, it rolls back and returns SLOT_UNAVAILABLE (409). A nightly cron rebuilds all slot counts from the PostgreSQL source of truth.",
+      },
+      {
+        icon: "🎟️",
+        title: "Multi-Tier Ticket Options",
+        description:
+          "Each attraction offers multiple ticket tiers (e.g. Entry Only vs Entry + Audio Guide vs Entry + Guide + Tower). Traveler categories (adult, child, infant, senior, student) each carry their own price, min/max counts, and age range. A comparison strip shows alternative tiers for the same attraction.",
+      },
+      {
+        icon: "🔐",
+        title: "Dual-Auth (JWT + Cookie)",
+        description:
+          "Login and register return both an httpOnly session cookie (survives page refresh, invisible to JS) and a JWT Bearer token stored in Redux memory (never in localStorage — XSS-safe). Every state-changing endpoint requires the X-Requested-With: XMLHttpRequest header as CSRF mitigation. Token lifetime is 30 days on both layers.",
+      },
+      {
+        icon: "💱",
+        title: "Multi-Currency Pricing",
+        description:
+          "All prices are stored in EUR cents in PostgreSQL. A background job fetches fresh rates from the ECB/Frankfurter API every hour and caches them in Redis (currency:rates, TTL 3600s). The frontend converts on the fly across 10 currencies (EUR, GBP, USD, AUD, CAD, CHF, AED, SAR, QAR, KWD) without a page reload.",
+      },
+      {
+        icon: "💳",
+        title: "Stripe Payments + Webhook Confirmation",
+        description:
+          "Checkout creates a Stripe PaymentIntent server-side. On payment_intent.succeeded, the webhook atomically decrements the Redis slot, inserts the booking row, and fires a confirmation email. If the DB insert fails after the Redis decrement, the slot count is incremented back to prevent phantom unavailability.",
+      },
+      {
+        icon: "🛡️",
+        title: "Backend Price Verification",
+        description:
+          "The booking endpoint re-derives the expected total from DB prices — never trusting the frontend total. It also validates the 4.9% service fee and verifies that the guest array length matches the traveler count. PRICE_MISMATCH (409) is returned if anything doesn't align, preventing checkout price tampering.",
+      },
+      {
+        icon: "❤️",
+        title: "Favorites with Guest Sync",
+        description:
+          "Unauthenticated users can save favorites to Redux/localStorage. On login, a POST /users/me/favorites/sync call merges guest favorites with server state — deduplicating by productId with server addedAt timestamps taking precedence.",
+      },
+      {
+        icon: "🗓️",
+        title: "Admin Schedule & Closure Management",
+        description:
+          "Admins manage recurring weekly time slots (dayOfWeek, timeSlots with per-slot capacity, validFrom/validUntil) via a CRUD API. Individual dates can be blocked per-option (OptionClosure) or across all options of a product in one call. Creating or deleting a closure invalidates the relevant Redis availability cache immediately.",
+      },
+      {
+        icon: "🚀",
+        title: "CI/CD Pipeline",
+        description:
+          "GitHub Actions runs TypeScript checks, ESLint, Drizzle migrations, Jest tests (PostgreSQL test DB, ioredis-mock), and npm audit on every push. On merge to main, it SSH-deploys to the Namecheap VPS, runs npm ci --production, migrates, and restarts PM2 in cluster mode behind Nginx with a valid SSL certificate.",
+      },
+      {
+        icon: "🌍",
+        title: "SEO + i18n",
+        description:
+          "Next.js App Router static generation for city and product pages. Multi-language support via i18n for English and Spanish audiences. Structured data (JSON-LD SoftwareApplication/Product), canonical URLs, og:type, and optimised Core Web Vitals for Google discovery across Spain-focused search traffic.",
+      },
+    ],
+    challenge:
+      "The hardest architectural problem was building an availability system that stays consistent under concurrent bookings without database round-trips on every calendar render. A naive SQL COUNT per slot would be too slow and still allow two users to book the same last spot. The solution: Redis stores per-slot spot counts; an atomic Lua script (DECRBY wrapped in a guard) handles the decrement in a single round-trip — if spotsLeft < requestedCount the script returns 0 and the booking is rejected before any DB write. A nightly cron rebuilds all slot keys from PostgreSQL (capacity − booked count) as the authoritative reset. Admin closures invalidate the cache immediately on write.",
+    outcome:
+      "Live at tourhill.com, processing real bookings across Barcelona attractions. Atomic availability prevents overselling under concurrent load. CI/CD pipeline runs on every push with TypeScript checks, lint, migrations, and tests passing. Price verification and atomic slot logic have blocked multiple checkout manipulation attempts in production logs.",
+  },
+
   "claude-stats": {
     slug: "claude-stats",
     coverImage: "/claude-states/claude-states.png",

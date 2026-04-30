@@ -312,7 +312,7 @@ export const projects: Project[] = [
     longDescription:
       "TourHill is a live, production-grade travel booking web application helping tourists discover and book skip-the-line tickets and expert guided tours across Spain's top destinations, starting with Barcelona. Built with Next.js 15 App Router, strict TypeScript, Zustand for state management, TanStack Query for server-state, Zod for form validation, and Framer Motion for animations. Supports multi-language (i18n) for international reach and is fully optimised for Core Web Vitals, SEO, and conversion.",
     category: ["fullstack", "freelance"],
-    tech: ["Next.js 15", "TypeScript", "Tailwind CSS", "Redux", "TanStack Query", "Zod", "React Hook Form", "Framer Motion", "i18n"],
+    tech: ["Next.js 15", "TypeScript", "Node.js", "Express.js", "PostgreSQL", "Redis", "Drizzle ORM", "Stripe", "Tailwind CSS", "Redux", "TanStack Query", "Zod", "Framer Motion", "GitHub Actions", "PM2", "Nginx", "i18n"],
     github: "https://github.com/Rafin31/Europe-Tour-Attraction",
     demo: "https://www.tourhill.com/",
     gradient: "from-sky-400 via-cyan-500 to-blue-600",
